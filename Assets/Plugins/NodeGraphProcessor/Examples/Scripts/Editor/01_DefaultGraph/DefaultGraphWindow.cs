@@ -7,7 +7,7 @@ public class DefaultGraphWindow : BaseGraphWindow
 {
 	private BaseGraph tmpGraph;
 
-	[MenuItem("Window/01 DefaultGraph")]
+	[MenuItem("Window/NodeGraphProcessor/01 DefaultGraph")]
 	public static BaseGraphWindow OpenWithTmpGraph()
 	{
 		var graphWindow = CreateWindow<DefaultGraphWindow>();

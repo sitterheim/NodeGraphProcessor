@@ -7,7 +7,7 @@ public class ExposedPropertiesGraphWindow : BaseGraphWindow
 {
 	private BaseGraph tmpGraph;
 
-	[MenuItem("Window/04 Exposed Properties")]
+	[MenuItem("Window/NodeGraphProcessor/04 Exposed Properties")]
 	public static BaseGraphWindow OpenWithTmpGraph()
 	{
 		var graphWindow = CreateWindow<ExposedPropertiesGraphWindow>();

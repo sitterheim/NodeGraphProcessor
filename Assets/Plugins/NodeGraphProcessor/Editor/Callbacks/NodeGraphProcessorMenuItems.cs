@@ -59,16 +59,17 @@ namespace NodeGraphProcessor.Editor
 			return null;
 		}
 
-		protected static void CreateDefaultNodeCSharpScritpt() =>
+		protected static void CreateDefaultNodeCSharpScript() =>
 			ProjectWindowUtil.CreateScriptAssetFromTemplateFile(nodeTemplatePath, nodeBaseName);
 
-		protected static void CreateDefaultNodeViewCSharpScritpt() =>
+		protected static void CreateDefaultNodeViewCSharpScript() =>
 			ProjectWindowUtil.CreateScriptAssetFromTemplateFile(nodeViewTemplatePath, nodeViewBaseName);
 
 		protected static class MenuItemPosition
 		{
-			public const int afterCreateScript = 81;
 			public const int beforeCreateScript = 79;
+			public const int alongsideCreateScript = 80;
+			public const int afterCreateScript = 81;
 		}
 	}
 }

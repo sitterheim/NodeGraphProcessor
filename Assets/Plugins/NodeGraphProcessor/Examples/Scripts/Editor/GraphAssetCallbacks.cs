@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class GraphAssetCallbacks
 {
-	[MenuItem("Assets/Create/GraphProcessor", false, 10)]
-	public static void CreateGraphPorcessor()
+	[MenuItem("Assets/Create/Insanely Awesome NodeGraph", false, 10)]
+	public static void CreateGraphProcessor()
 	{
 		var graph = ScriptableObject.CreateInstance<BaseGraph>();
 		ProjectWindowUtil.CreateAsset(graph, "GraphProcessor.asset");

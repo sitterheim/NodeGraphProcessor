@@ -7,7 +7,7 @@ public class CustomContextMenuGraphWindow : BaseGraphWindow
 {
 	private BaseGraph tmpGraph;
 
-	[MenuItem("Window/02 Custom Context Menu")]
+	[MenuItem("Window/NodeGraphProcessor/02 Custom Context Menu")]
 	public static BaseGraphWindow OpenWithTmpGraph()
 	{
 		var graphWindow = CreateWindow<CustomContextMenuGraphWindow>();

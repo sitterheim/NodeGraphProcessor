@@ -7,7 +7,7 @@ public class CustomToolbarGraphWindow : BaseGraphWindow
 {
 	private BaseGraph tmpGraph;
 
-	[MenuItem("Window/03 Custom Toolbar")]
+	[MenuItem("Window/NodeGraphProcessor/03 Custom Toolbar")]
 	public static BaseGraphWindow OpenWithTmpGraph()
 	{
 		var graphWindow = CreateWindow<CustomToolbarGraphWindow>();

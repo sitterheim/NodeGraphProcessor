@@ -8,7 +8,7 @@ public class AllGraphWindow : BaseGraphWindow
 	private BaseGraph tmpGraph;
 	private CustomToolbarView toolbarView;
 
-	[MenuItem("Window/05 All Combined")]
+	[MenuItem("Window/NodeGraphProcessor/05 All Combined")]
 	public static BaseGraphWindow OpenWithTmpGraph()
 	{
 		var graphWindow = CreateWindow<AllGraphWindow>();
