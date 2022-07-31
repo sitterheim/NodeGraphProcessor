@@ -13,8 +13,8 @@ namespace GraphProcessor
             public bool isHidden = false;
             public bool expanded = false;
 
-            [SerializeField][HideInInspector]
-            public string guid = null;
+            [SerializeField]
+            internal string guid = null;
 
             public override bool Equals(object obj)
             {

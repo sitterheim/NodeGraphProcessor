@@ -4,7 +4,7 @@ using System;
 using NodeGraphProcessor.Examples;
 using System.Collections.Generic;
 
-public class CustomConvertions : ITypeAdapter
+public class CustomConversions : ITypeAdapter
 {
     public static Vector4 ConvertFloatToVector4(float from) => new Vector4(from, from, from, from);
     public static float ConvertVector4ToFloat(Vector4 from) => from.x;

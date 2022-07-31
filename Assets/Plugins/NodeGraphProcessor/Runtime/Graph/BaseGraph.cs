@@ -128,8 +128,8 @@ namespace GraphProcessor
 		Scene							linkedScene;
 
 		// Trick to keep the node inspector alive during the editor session
-		[SerializeField][HideInInspector]
-		public UnityEngine.Object		nodeInspectorReference;
+		[SerializeField]
+		internal UnityEngine.Object		nodeInspectorReference;
 
 		//graph visual properties
 		public Vector3					position = Vector3.zero;
@@ -605,7 +605,7 @@ namespace GraphProcessor
 				onExposedParameterListChanged?.Invoke();
 		}
 
-		public void NotifyExposedParameterListChanged()
+		internal void NotifyExposedParameterListChanged()
 			=> onExposedParameterListChanged?.Invoke();
 
 		/// <summary>
