@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using GraphProcessor;
 using UnityEditor;
-using GraphProcessor;
 using UnityEngine.UIElements;
 
 [CustomEditor(typeof(BaseGraph), true)]
@@ -18,19 +15,19 @@ public class GraphAssetInspector : GraphInspector
 
 		root.Add(new Button(() => EditorWindow.GetWindow<DefaultGraphWindow>().InitializeGraph(target as BaseGraph))
 		{
-			text = "Open base graph window"
+			text = "Open base graph window",
 		});
 		root.Add(new Button(() => EditorWindow.GetWindow<CustomContextMenuGraphWindow>().InitializeGraph(target as BaseGraph))
 		{
-			text = "Open custom context menu graph window"
+			text = "Open custom context menu graph window",
 		});
 		root.Add(new Button(() => EditorWindow.GetWindow<CustomToolbarGraphWindow>().InitializeGraph(target as BaseGraph))
 		{
-			text = "Open custom toolbar graph window"
+			text = "Open custom toolbar graph window",
 		});
 		root.Add(new Button(() => EditorWindow.GetWindow<ExposedPropertiesGraphWindow>().InitializeGraph(target as BaseGraph))
 		{
-			text = "Open exposed properties graph window"
+			text = "Open exposed properties graph window",
 		});
 	}
 }

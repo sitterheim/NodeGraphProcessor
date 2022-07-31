@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using GraphProcessor;
 using UnityEditor;
-using GraphProcessor;
+using UnityEngine;
 
 public class ExposedPropertiesGraphWindow : BaseGraphWindow
 {
-	BaseGraph	tmpGraph;
+	private BaseGraph tmpGraph;
 
 	[MenuItem("Window/04 Exposed Properties")]
 	public static BaseGraphWindow OpenWithTmpGraph()
 	{
-		var graphWindow = CreateWindow< ExposedPropertiesGraphWindow >();
+		var graphWindow = CreateWindow<ExposedPropertiesGraphWindow>();
 
 		// When the graph is opened from the window, we don't save the graph to disk
-		graphWindow.tmpGraph = ScriptableObject.CreateInstance<BaseGraph>();
+		graphWindow.tmpGraph = CreateInstance<BaseGraph>();
 		graphWindow.tmpGraph.hideFlags = HideFlags.HideAndDontSave;
 		graphWindow.InitializeGraph(graphWindow.tmpGraph);
 
@@ -39,8 +37,5 @@ public class ExposedPropertiesGraphWindow : BaseGraphWindow
 		rootView.Add(graphView);
 	}
 
-	protected override void InitializeGraphView(BaseGraphView view)
-	{
-		view.OpenPinned< ExposedParameterView >();
-	}
+	protected override void InitializeGraphView(BaseGraphView view) => view.OpenPinned<ExposedParameterView>();
 }

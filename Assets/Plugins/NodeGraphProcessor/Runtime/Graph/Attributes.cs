@@ -1,18 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using System;
+﻿using System;
 
 namespace GraphProcessor
 {
 	/// <summary>
 	/// Tell that this field is will generate an input port
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Field)]
 	public class InputAttribute : Attribute
 	{
-		public string		name;
-		public bool			allowMultiple = false;
+		public string name;
+		public bool allowMultiple;
 
 		/// <summary>
 		/// Mark the field as an input port
@@ -29,11 +26,11 @@ namespace GraphProcessor
 	/// <summary>
 	/// Tell that this field is will generate an output port
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Field)]
 	public class OutputAttribute : Attribute
 	{
-		public string		name;
-		public bool			allowMultiple = true;
+		public string name;
+		public bool allowMultiple = true;
 
 		/// <summary>
 		/// Mark the field as an output port
@@ -50,10 +47,8 @@ namespace GraphProcessor
 	/// <summary>
 	/// Creates a vertical port instead of the default horizontal one
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-	public class VerticalAttribute : Attribute
-	{
-	}
+	[AttributeUsage(AttributeTargets.Field)]
+	public class VerticalAttribute : Attribute {}
 
 	/// <summary>
 	/// Register the node in the NodeProvider class. The node will also be available in the node creation window.
@@ -61,8 +56,8 @@ namespace GraphProcessor
 	[AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
 	public class NodeMenuItemAttribute : Attribute
 	{
-		public string	menuTitle;
-		public Type		onlyCompatibleWithGraph;
+		public string menuTitle;
+		public Type onlyCompatibleWithGraph;
 
 		/// <summary>
 		/// Register the node in the NodeProvider class. The node will also be available in the node creation window.
@@ -78,31 +73,28 @@ namespace GraphProcessor
 	/// <summary>
 	/// Set a custom drawer for a field. It can then be created using the FieldFactory
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Class)]
 	[Obsolete("You can use the standard Unity CustomPropertyDrawer instead.")]
 	public class FieldDrawerAttribute : Attribute
 	{
-		public Type		fieldType;
+		public Type fieldType;
 
 		/// <summary>
 		/// Register a custom view for a type in the FieldFactory class
 		/// </summary>
 		/// <param name="fieldType"></param>
-		public FieldDrawerAttribute(Type fieldType)
-		{
-			this.fieldType = fieldType;
-		}
+		public FieldDrawerAttribute(Type fieldType) => this.fieldType = fieldType;
 	}
 
 	/// <summary>
 	/// Allow you to customize the input function of a port
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Method)]
 	public class CustomPortInputAttribute : Attribute
 	{
-		public string	fieldName;
-		public Type		inputType;
-		public bool		allowCast;
+		public string fieldName;
+		public Type inputType;
+		public bool allowCast;
 
 		/// <summary>
 		/// Allow you to customize the input function of a port.
@@ -122,12 +114,12 @@ namespace GraphProcessor
 	/// <summary>
 	/// Allow you to customize the input function of a port
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Method)]
 	public class CustomPortOutputAttribute : Attribute
 	{
-		public string	fieldName;
-		public Type		outputType;
-		public bool		allowCast;
+		public string fieldName;
+		public Type outputType;
+		public bool allowCast;
 
 		/// <summary>
 		/// Allow you to customize the output function of a port.
@@ -147,10 +139,10 @@ namespace GraphProcessor
 	/// <summary>
 	/// Allow you to modify the generated port view from a field. Can be used to generate multiple ports from one field.
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Method)]
 	public class CustomPortBehaviorAttribute : Attribute
 	{
-		public string		fieldName;
+		public string fieldName;
 
 		/// <summary>
 		/// Allow you to modify the generated port view from a field. Can be used to generate multiple ports from one field.
@@ -160,10 +152,7 @@ namespace GraphProcessor
 		/// </code>
 		/// </summary>
 		/// <param name="fieldName">local node field name</param>
-		public CustomPortBehaviorAttribute(string fieldName)
-		{
-			this.fieldName = fieldName;
-		}
+		public CustomPortBehaviorAttribute(string fieldName) => this.fieldName = fieldName;
 	}
 
 	/// <summary>
@@ -177,31 +166,25 @@ namespace GraphProcessor
 		/// </summary>
 		public Type type;
 
-		public CustomPortTypeBehavior(Type type)
-		{
-			this.type = type;
-		}
+		public CustomPortTypeBehavior(Type type) => this.type = type;
 	}
 
 	/// <summary>
 	/// Allow you to have a custom view for your stack nodes
 	/// </summary>
-	[AttributeUsage(AttributeTargets.Class, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Class)]
 	public class CustomStackNodeView : Attribute
 	{
-		public Type	stackNodeType;
+		public Type stackNodeType;
 
 		/// <summary>
 		/// Allow you to have a custom view for your stack nodes
 		/// </summary>
 		/// <param name="stackNodeType">The type of the stack node you target</param>
-		public CustomStackNodeView(Type stackNodeType)
-		{
-			this.stackNodeType = stackNodeType;
-		}
+		public CustomStackNodeView(Type stackNodeType) => this.stackNodeType = stackNodeType;
 	}
 
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Field)]
 	public class VisibleIf : Attribute
 	{
 		public string fieldName;
@@ -214,31 +197,23 @@ namespace GraphProcessor
 		}
 	}
 
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
+	[AttributeUsage(AttributeTargets.Field)]
 	public class ShowInInspector : Attribute
 	{
 		public bool showInNode;
 
-		public ShowInInspector(bool showInNode = false)
-		{
-			this.showInNode = showInNode;
-		}
+		public ShowInInspector(bool showInNode = false) => this.showInNode = showInNode;
 	}
-	
-	[AttributeUsage(AttributeTargets.Field, AllowMultiple = false)]
-	public class ShowAsDrawer : Attribute
-	{
-	}
-	
+
+	[AttributeUsage(AttributeTargets.Field)]
+	public class ShowAsDrawer : Attribute {}
+
 	[AttributeUsage(AttributeTargets.Field)]
 	public class SettingAttribute : Attribute
 	{
 		public string name;
 
-		public SettingAttribute(string name = null)
-		{
-			this.name = name;
-		}
+		public SettingAttribute(string name = null) => this.name = name;
 	}
 
 	[AttributeUsage(AttributeTargets.Method)]

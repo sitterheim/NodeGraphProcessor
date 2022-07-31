@@ -6,6 +6,6 @@ namespace GraphProcessor
 		None,
 		Info,
 		Warning,
-		Error
+		Error,
 	}
 }

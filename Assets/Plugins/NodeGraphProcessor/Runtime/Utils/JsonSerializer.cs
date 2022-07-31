@@ -1,8 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-using System.Reflection;
+﻿using System;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
@@ -15,20 +11,17 @@ namespace GraphProcessor
 	[Serializable]
 	public struct JsonElement
 	{
-		public string		type;
-		public string		jsonDatas;
+		public string type;
+		public string jsonDatas;
 
-		public override string ToString()
-		{
-			return "type: " + type + " | JSON: " + jsonDatas;
-		}
+		public override string ToString() => "type: " + type + " | JSON: " + jsonDatas;
 	}
 
 	public static class JsonSerializer
 	{
-		public static JsonElement	Serialize(object obj)
+		public static JsonElement Serialize(object obj)
 		{
-			JsonElement	elem = new JsonElement();
+			var elem = new JsonElement();
 
 			elem.type = obj.GetType().AssemblyQualifiedName;
 #if UNITY_EDITOR
@@ -40,12 +33,12 @@ namespace GraphProcessor
 			return elem;
 		}
 
-		public static T	Deserialize< T >(JsonElement e)
+		public static T Deserialize<T>(JsonElement e)
 		{
 			if (typeof(T) != Type.GetType(e.type))
 				throw new ArgumentException("Deserializing type is not the same than Json element type");
 
-			var obj = Activator.CreateInstance< T >();
+			var obj = Activator.CreateInstance<T>();
 #if UNITY_EDITOR
 			EditorJsonUtility.FromJsonOverwrite(e.jsonDatas, obj);
 #else
@@ -55,14 +48,12 @@ namespace GraphProcessor
 			return obj;
 		}
 
-		public static JsonElement	SerializeNode(BaseNode node)
-		{
-			return Serialize(node);
-		}
+		public static JsonElement SerializeNode(BaseNode node) => Serialize(node);
 
-		public static BaseNode	DeserializeNode(JsonElement e)
+		public static BaseNode DeserializeNode(JsonElement e)
 		{
-			try {
+			try
+			{
 				var baseNodeType = Type.GetType(e.type);
 
 				if (e.jsonDatas == null)
@@ -75,7 +66,9 @@ namespace GraphProcessor
 				JsonUtility.FromJsonOverwrite(e.jsonDatas, node);
 #endif
 				return node;
-			} catch {
+			}
+			catch
+			{
 				return null;
 			}
 		}

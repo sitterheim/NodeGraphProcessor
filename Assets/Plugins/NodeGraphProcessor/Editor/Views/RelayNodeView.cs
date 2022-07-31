@@ -1,17 +1,14 @@
-﻿using UnityEngine;
-using UnityEngine.UIElements;
-using GraphProcessor;
-using UnityEditor;
+﻿using GraphProcessor;
 using System.Linq;
-using System;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 [NodeCustomEditor(typeof(RelayNode))]
 public class RelayNodeView : BaseNodeView
 {
-	RelayNode	relay => nodeTarget as RelayNode;
-	VisualElement input => this.Q("input");
-	VisualElement output => this.Q("output");
+	private RelayNode relay => nodeTarget as RelayNode;
+	private VisualElement input => this.Q("input");
+	private VisualElement output => this.Q("output");
 
 	public override void Enable()
 	{
@@ -30,7 +27,7 @@ public class RelayNodeView : BaseNodeView
 		base.BuildContextualMenu(evt);
 	}
 
-	void TogglePackInput(DropdownMenuAction action)
+	private void TogglePackInput(DropdownMenuAction action)
 	{
 		relay.packInput = !relay.packInput;
 
@@ -39,7 +36,7 @@ public class RelayNodeView : BaseNodeView
 		MarkDirtyRepaint();
 	}
 
-	void ToggleUnpackOutput(DropdownMenuAction action)
+	private void ToggleUnpackOutput(DropdownMenuAction action)
 	{
 		relay.unpackOutput = !relay.unpackOutput;
 
@@ -48,26 +45,26 @@ public class RelayNodeView : BaseNodeView
 		MarkDirtyRepaint();
 	}
 
-	DropdownMenuAction.Status PackInputStatus(DropdownMenuAction action)
+	private DropdownMenuAction.Status PackInputStatus(DropdownMenuAction action)
 	{
 		if (relay.GetNonRelayEdges().Count != 1)
 			return DropdownMenuAction.Status.Disabled;
 
 		if (relay.packInput)
 			return DropdownMenuAction.Status.Checked;
-		else
-			return DropdownMenuAction.Status.Normal;
+
+		return DropdownMenuAction.Status.Normal;
 	}
 
-	DropdownMenuAction.Status UnpackOutputStatus(DropdownMenuAction action)
+	private DropdownMenuAction.Status UnpackOutputStatus(DropdownMenuAction action)
 	{
 		if (relay.GetNonRelayEdges().Count == 0)
 			return DropdownMenuAction.Status.Disabled;
 
 		if (relay.unpackOutput)
 			return DropdownMenuAction.Status.Checked;
-		else
-			return DropdownMenuAction.Status.Normal;
+
+		return DropdownMenuAction.Status.Normal;
 	}
 
 	public override void SetPosition(Rect newPos)
@@ -76,11 +73,11 @@ public class RelayNodeView : BaseNodeView
 		UpdateSize();
 	}
 
-	void UpdateSize()
+	private void UpdateSize()
 	{
 		if (relay.unpackOutput)
 		{
-			int inputEdgeCount = relay.GetNonRelayEdges().Count + 1;
+			var inputEdgeCount = relay.GetNonRelayEdges().Count + 1;
 			style.height = Mathf.Max(30, 24 * inputEdgeCount + 5);
 			style.width = -1;
 			if (input != null)
@@ -101,29 +98,29 @@ public class RelayNodeView : BaseNodeView
 		}
 	}
 
-	public override void OnRemoved()
-	{
+	public override void OnRemoved() =>
 		// We delay the connection of the edges just in case something happens to the nodes we are trying to connect
 		// i.e. multiple relay node deletion
-		schedule.Execute(() => {
-			if (!relay.unpackOutput)
+		schedule.Execute(() =>
 			{
-				var inputEdges = inputPortViews[0].GetEdges();
-				var outputEdges = outputPortViews[0].GetEdges();
-
-				if (inputEdges.Count == 0 || outputEdges.Count == 0)
-					return;
-
-				var inputEdge = inputEdges.First();
-
-				foreach (var outputEdge in outputEdges.ToList())
+				if (!relay.unpackOutput)
 				{
-					var input = outputEdge.input as PortView;
-					var output = inputEdge.output as PortView;
+					var inputEdges = inputPortViews[0].GetEdges();
+					var outputEdges = outputPortViews[0].GetEdges();
 
-					owner.Connect(input, output);
+					if (inputEdges.Count == 0 || outputEdges.Count == 0)
+						return;
+
+					var inputEdge = inputEdges.First();
+
+					foreach (var outputEdge in outputEdges.ToList())
+					{
+						var input = outputEdge.input as PortView;
+						var output = inputEdge.output as PortView;
+
+						owner.Connect(input, output);
+					}
 				}
-			}
-		}).ExecuteLater(1);
-	}
+			})
+			.ExecuteLater(1);
 }

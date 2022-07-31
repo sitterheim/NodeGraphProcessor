@@ -1,14 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using GraphProcessor;
 using UnityEngine;
-using GraphProcessor;
 
 public class RuntimeGraph : MonoBehaviour
 {
-	public BaseGraph	graph;
-	public ProcessGraphProcessor	processor;
+	public BaseGraph graph;
 
-	public GameObject	assignedGameObject;
+	public GameObject assignedGameObject;
+	public ProcessGraphProcessor processor;
+
+	private int i;
 
 	private void Start()
 	{
@@ -16,10 +16,8 @@ public class RuntimeGraph : MonoBehaviour
 			processor = new ProcessGraphProcessor(graph);
 	}
 
-	int i = 0;
-
-    void Update()
-    {
+	private void Update()
+	{
 		if (graph != null)
 		{
 			graph.SetParameterValue("Input", (float)i++);
@@ -27,5 +25,5 @@ public class RuntimeGraph : MonoBehaviour
 			processor.Run();
 			Debug.Log("Output: " + graph.GetParameterValue("Output"));
 		}
-    }
+	}
 }

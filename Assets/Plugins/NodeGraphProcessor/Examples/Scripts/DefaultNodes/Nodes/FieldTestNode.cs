@@ -1,10 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
 using GraphProcessor;
-using System.Linq;
+using System;
+using UnityEngine;
 
-[System.Serializable, NodeMenuItem("Custom/FieldTestNode")]
+[Serializable] [NodeMenuItem("Custom/FieldTestNode")]
 public class FieldTestNode : BaseNode
 {
 	public string s;
@@ -14,7 +12,7 @@ public class FieldTestNode : BaseNode
 	public Vector3 v3;
 	public Vector4 v4;
 	public LayerMask layer;
-	new public Color color;
+	public new Color color;
 	public Bounds bounds;
 	public Rect rect;
 	public CameraClearFlags flags = CameraClearFlags.Color;
@@ -22,7 +20,7 @@ public class FieldTestNode : BaseNode
 	public Gradient gradient;
 	public AnimationCurve curve;
 
-	public override string		name => "FieldTestNode";
+	public override string name => "FieldTestNode";
 
-	protected override void Process() { }
+	protected override void Process() {}
 }

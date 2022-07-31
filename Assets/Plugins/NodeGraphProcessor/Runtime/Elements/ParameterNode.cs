@@ -1,13 +1,10 @@
-﻿using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using GraphProcessor;
-using System.Linq;
-using System;
 
 namespace GraphProcessor
 {
-	[System.Serializable]
+	[Serializable]
 	public class ParameterNode : BaseNode
 	{
 		[Input]
@@ -16,17 +13,17 @@ namespace GraphProcessor
 		[Output]
 		public object output;
 
-		public override string name => "Parameter";
-
 		// We serialize the GUID of the exposed parameter in the graph so we can retrieve the true ExposedParameter from the graph
-		[SerializeField, HideInInspector]
+		[SerializeField] [HideInInspector]
 		public string parameterGUID;
+
+		public ParameterAccessor accessor;
+
+		public override string name => "Parameter";
 
 		public ExposedParameter parameter { get; private set; }
 
 		public event Action onParameterChanged;
-
-		public ParameterAccessor accessor;
 
 		protected override void Enable()
 		{
@@ -38,7 +35,7 @@ namespace GraphProcessor
 				onParameterChanged?.Invoke();
 		}
 
-		void LoadExposedParameter()
+		private void LoadExposedParameter()
 		{
 			parameter = graph.GetExposedParameterFromGUID(parameterGUID);
 
@@ -54,16 +51,14 @@ namespace GraphProcessor
 			output = parameter.value;
 		}
 
-		void OnParamChanged(ExposedParameter modifiedParam)
+		private void OnParamChanged(ExposedParameter modifiedParam)
 		{
 			if (parameter == modifiedParam)
-			{
 				onParameterChanged?.Invoke();
-			}
 		}
 
 		[CustomPortBehavior(nameof(output))]
-		IEnumerable<PortData> GetOutputPort(List<SerializableEdge> edges)
+		private IEnumerable<PortData> GetOutputPort(List<SerializableEdge> edges)
 		{
 			if (accessor == ParameterAccessor.Get)
 			{
@@ -71,14 +66,14 @@ namespace GraphProcessor
 				{
 					identifier = "output",
 					displayName = "Value",
-					displayType = (parameter == null) ? typeof(object) : parameter.GetValueType(),
-					acceptMultipleEdges = true
+					displayType = parameter == null ? typeof(object) : parameter.GetValueType(),
+					acceptMultipleEdges = true,
 				};
 			}
 		}
 
 		[CustomPortBehavior(nameof(input))]
-		IEnumerable<PortData> GetInputPort(List<SerializableEdge> edges)
+		private IEnumerable<PortData> GetInputPort(List<SerializableEdge> edges)
 		{
 			if (accessor == ParameterAccessor.Set)
 			{
@@ -86,7 +81,7 @@ namespace GraphProcessor
 				{
 					identifier = "input",
 					displayName = "Value",
-					displayType = (parameter == null) ? typeof(object) : parameter.GetValueType(),
+					displayType = parameter == null ? typeof(object) : parameter.GetValueType(),
 				};
 			}
 		}
@@ -114,6 +109,6 @@ namespace GraphProcessor
 	public enum ParameterAccessor
 	{
 		Get,
-		Set
+		Set,
 	}
 }

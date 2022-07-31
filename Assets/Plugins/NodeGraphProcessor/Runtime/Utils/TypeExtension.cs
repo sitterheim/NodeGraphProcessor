@@ -1,4 +1,3 @@
-using UnityEngine;
 using System;
 using System.Linq.Expressions;
 
@@ -24,6 +23,5 @@ namespace GraphProcessor
 				return false;
 			}
 		}
-
 	}
 }

@@ -1,25 +1,24 @@
+using GraphProcessor;
 using System;
 using System.Collections;
-using GraphProcessor;
 using UnityEngine;
 
 namespace NodeGraphProcessor.Examples
 {
-	[Serializable, NodeMenuItem("Functions/Wait Frames")]
+	[Serializable] [NodeMenuItem("Functions/Wait Frames")]
 	public class WaitFrameNode : WaitableNode
 	{
-		public override string name => "Wait Frames";
-
-		[SerializeField, Input(name = "Frames")]
-		public int frame = 1;
-
 		private static WaitFrameMonoBehaviour waitFrameMonoBehaviour;
+
+		[SerializeField] [Input(name = "Frames")]
+		public int frame = 1;
+		public override string name => "Wait Frames";
 
 		protected override void Process()
 		{
-			if(waitFrameMonoBehaviour == null)
+			if (waitFrameMonoBehaviour == null)
 			{
-				var go = new GameObject(name: "WaitFrameGameObject");
+				var go = new GameObject("WaitFrameGameObject");
 				waitFrameMonoBehaviour = go.AddComponent<WaitFrameMonoBehaviour>();
 			}
 
@@ -29,16 +28,14 @@ namespace NodeGraphProcessor.Examples
 
 	public class WaitFrameMonoBehaviour : MonoBehaviour
 	{
-		public void Process(int frame, Action callback)
-		{
-			StartCoroutine(_Process(frame, callback));
-		}
+		public void Process(int frame, Action callback) => StartCoroutine(_Process(frame, callback));
 
 		private IEnumerator _Process(int frame, Action callback)
 		{
-			for(int i = 0; i < frame; i++)
+			for (var i = 0; i < frame; i++)
 			{
 				yield return new WaitForEndOfFrame();
+
 				i++;
 			}
 

@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using GraphProcessor;
 using UnityEditor;
-using GraphProcessor;
 using UnityEditor.Callbacks;
-using System.IO;
+using UnityEngine;
 
 public class GraphAssetCallbacks
 {
 	[MenuItem("Assets/Create/GraphProcessor", false, 10)]
 	public static void CreateGraphPorcessor()
 	{
-		var graph = ScriptableObject.CreateInstance< BaseGraph >();
+		var graph = ScriptableObject.CreateInstance<BaseGraph>();
 		ProjectWindowUtil.CreateAsset(graph, "GraphProcessor.asset");
 	}
 
@@ -22,7 +19,7 @@ public class GraphAssetCallbacks
 
 		if (asset != null && AssetDatabase.GetAssetPath(asset).Contains("Examples"))
 		{
-			EditorWindow.GetWindow<AllGraphWindow>().InitializeGraph(asset as BaseGraph);
+			EditorWindow.GetWindow<AllGraphWindow>().InitializeGraph(asset);
 			return true;
 		}
 		return false;

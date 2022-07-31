@@ -1,7 +1,6 @@
-﻿using UnityEngine;
+﻿using GraphProcessor;
 using UnityEditor;
-using UnityEngine.UIElements;
-using GraphProcessor;
+using UnityEngine;
 
 [NodeCustomEditor(typeof(MessageNode2))]
 public class MessageNode2View : BaseNodeView

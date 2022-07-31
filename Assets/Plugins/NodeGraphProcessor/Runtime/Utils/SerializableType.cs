@@ -7,23 +7,20 @@ namespace GraphProcessor
 	[Serializable]
 	public class SerializableType : ISerializationCallbackReceiver
 	{
-		static Dictionary<string, Type> typeCache = new Dictionary<string, Type>();
-		static Dictionary<Type, string> typeNameCache = new Dictionary<Type, string>();
+		private static Dictionary<string, Type> typeCache = new();
+		private static Dictionary<Type, string> typeNameCache = new();
 
 		[SerializeField]
-		public string	serializedType;
+		public string serializedType;
 
 		[NonSerialized]
-		public Type		type;
+		public Type type;
 
-		public SerializableType(Type t)
+		public SerializableType(Type t) => type = t;
+
+		public void OnAfterDeserialize()
 		{
-			type = t;
-		}
-
-        public void OnAfterDeserialize()
-        {
-			if (!String.IsNullOrEmpty(serializedType))
+			if (!string.IsNullOrEmpty(serializedType))
 			{
 				if (!typeCache.TryGetValue(serializedType, out type))
 				{
@@ -31,10 +28,10 @@ namespace GraphProcessor
 					typeCache[serializedType] = type;
 				}
 			}
-        }
+		}
 
-        public void OnBeforeSerialize()
-        {
+		public void OnBeforeSerialize()
+		{
 			if (type != null)
 			{
 				if (!typeNameCache.TryGetValue(type, out serializedType))
@@ -43,6 +40,6 @@ namespace GraphProcessor
 					typeNameCache[type] = serializedType;
 				}
 			}
-        }
-    }
+		}
+	}
 }

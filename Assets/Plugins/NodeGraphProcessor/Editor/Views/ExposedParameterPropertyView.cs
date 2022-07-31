@@ -1,7 +1,4 @@
 using UnityEngine.UIElements;
-using UnityEditor.UIElements;
-using UnityEditor;
-using UnityEngine;
 
 namespace GraphProcessor
 {
@@ -9,20 +6,19 @@ namespace GraphProcessor
 	{
 		protected BaseGraphView baseGraphView;
 
-		public ExposedParameter parameter { get; private set; }
+		public ExposedParameter parameter { get; }
 
-		public Toggle     hideInInspector { get; private set; }
+		public Toggle hideInInspector { get; private set; }
 
 		public ExposedParameterPropertyView(BaseGraphView graphView, ExposedParameter param)
 		{
 			baseGraphView = graphView;
-			parameter      = param;
+			parameter = param;
 
-			var field = graphView.exposedParameterFactory.GetParameterSettingsField(param, (newValue) => {
-				param.settings = newValue as ExposedParameter.Settings;
-			});
+			var field = graphView.exposedParameterFactory.GetParameterSettingsField(param,
+				newValue => { param.settings = newValue as ExposedParameter.Settings; });
 
 			Add(field);
 		}
 	}
-} 
+}

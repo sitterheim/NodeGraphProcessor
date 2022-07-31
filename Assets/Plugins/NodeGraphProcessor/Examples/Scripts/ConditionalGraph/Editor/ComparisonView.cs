@@ -1,28 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
-using GraphProcessor;
+﻿using GraphProcessor;
 using NodeGraphProcessor.Examples;
+using UnityEditor.UIElements;
+using UnityEngine.UIElements;
 
 [NodeCustomEditor(typeof(Comparison))]
 public class ComparisonView : BaseNodeView
 {
 	public override void Enable()
 	{
-		Comparison comparisonNode = nodeTarget as Comparison;
+		var comparisonNode = nodeTarget as Comparison;
 		DrawDefaultInspector();
-		
+
 		var inputA = new FloatField("In A") { value = comparisonNode.inA };
 		var inputB = new FloatField("In B") { value = comparisonNode.inB };
-		inputA.RegisterValueChangedCallback(v => {
+		inputA.RegisterValueChangedCallback(v =>
+		{
 			owner.RegisterCompleteObjectUndo("Change InA value");
 			comparisonNode.inA = v.newValue;
 		});
-		inputB.RegisterValueChangedCallback(v => {
+		inputB.RegisterValueChangedCallback(v =>
+		{
 			owner.RegisterCompleteObjectUndo("Change InB value");
 			comparisonNode.inB = v.newValue;
 		});

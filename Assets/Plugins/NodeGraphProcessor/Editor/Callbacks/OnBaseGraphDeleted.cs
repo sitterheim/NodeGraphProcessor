@@ -1,12 +1,12 @@
-﻿using UnityEngine;
-using UnityEditor;
+﻿using UnityEditor;
+using UnityEngine;
 
 namespace GraphProcessor
 {
 	[ExecuteAlways]
-	public class DeleteCallback : UnityEditor.AssetModificationProcessor
+	public class DeleteCallback : AssetModificationProcessor
 	{
-		static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
+		private static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
 		{
 			var objects = AssetDatabase.LoadAllAssetsAtPath(path);
 
@@ -14,9 +14,9 @@ namespace GraphProcessor
 			{
 				if (obj is BaseGraph b)
 				{
-					foreach (var graphWindow in Resources.FindObjectsOfTypeAll< BaseGraphWindow >())
+					foreach (var graphWindow in Resources.FindObjectsOfTypeAll<BaseGraphWindow>())
 						graphWindow.OnGraphDeleted();
-					
+
 					b.OnAssetDeleted();
 				}
 			}

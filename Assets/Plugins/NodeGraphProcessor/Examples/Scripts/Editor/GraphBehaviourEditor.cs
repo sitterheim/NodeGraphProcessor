@@ -1,35 +1,29 @@
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 [CustomEditor(typeof(GraphBehaviour))]
 public class GraphBehaviourEditor : Editor
 {
-    Editor graphEditor;
-    GraphBehaviour behaviour => target as GraphBehaviour;
+	private Editor graphEditor;
 
-    void OnEnable()
-    {
-        graphEditor = Editor.CreateEditor(behaviour.graph);
-    }
+	private void OnEnable() => graphEditor = CreateEditor(behaviour.graph);
 
-    void OnDisable()
-    {
-        DestroyImmediate(graphEditor);
-    }
+	private void OnDisable() => DestroyImmediate(graphEditor);
 
-    public override VisualElement CreateInspectorGUI()
-    {
-        var root = new VisualElement();
-        var graphContainer = graphEditor != null ? graphEditor.CreateInspectorGUI().Q("ExposedParameters") : null;
+	private GraphBehaviour behaviour => target as GraphBehaviour;
 
-        root.Add(new Button(() => EditorWindow.GetWindow<AllGraphWindow>().InitializeGraph(behaviour.graph))
-        {
-            text = "Open"
-        });
+	public override VisualElement CreateInspectorGUI()
+	{
+		var root = new VisualElement();
+		var graphContainer = graphEditor != null ? graphEditor.CreateInspectorGUI().Q("ExposedParameters") : null;
 
-        root.Add(graphContainer);
+		root.Add(new Button(() => EditorWindow.GetWindow<AllGraphWindow>().InitializeGraph(behaviour.graph))
+		{
+			text = "Open",
+		});
 
-        return root;
-    }
+		root.Add(graphContainer);
+
+		return root;
+	}
 }

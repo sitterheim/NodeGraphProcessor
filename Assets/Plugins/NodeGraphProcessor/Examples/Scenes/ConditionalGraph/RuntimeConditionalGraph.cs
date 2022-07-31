@@ -1,6 +1,6 @@
-﻿using UnityEngine;
-using GraphProcessor;
+﻿using GraphProcessor;
 using NodeGraphProcessor.Examples;
+using UnityEngine;
 
 public class RuntimeConditionalGraph : MonoBehaviour
 {
@@ -11,7 +11,7 @@ public class RuntimeConditionalGraph : MonoBehaviour
 
 	private void Start()
 	{
-		if(graph != null)
+		if (graph != null)
 			processor = new ConditionalProcessor(graph);
 
 		processor.Run();

@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using GraphProcessor;
+using System;
 using UnityEngine;
-using GraphProcessor;
-using System.Linq;
 
-[System.Serializable, NodeMenuItem("Custom/Game Object")]
+[Serializable] [NodeMenuItem("Custom/Game Object")]
 public class GameObjectNode : BaseNode, ICreateNodeFrom<GameObject>
 {
-	[Output(name = "Out"), SerializeField]
-	public GameObject			output;
-
-	public override string		name => "Game Object";
+	[Output(name = "Out")] [SerializeField]
+	public GameObject output;
 
 	public bool InitializeNodeFromObject(GameObject value)
 	{
 		output = value;
 		return true;
 	}
+
+	public override string name => "Game Object";
 }

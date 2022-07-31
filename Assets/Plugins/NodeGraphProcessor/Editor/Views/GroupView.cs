@@ -1,115 +1,102 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace GraphProcessor
 {
-    public class GroupView : UnityEditor.Experimental.GraphView.Group
+	public class GroupView : UnityEditor.Experimental.GraphView.Group
 	{
-		public BaseGraphView	owner;
-		public Group		    group;
+		private readonly string groupStyle = "GraphProcessorStyles/GroupView";
+		public BaseGraphView owner;
+		public Group group;
 
-        Label                   titleLabel;
-        ColorField              colorField;
+		private Label titleLabel;
+		private ColorField colorField;
 
-        readonly string         groupStyle = "GraphProcessorStyles/GroupView";
-
-        public GroupView()
-        {
-            styleSheets.Add(Resources.Load<StyleSheet>(groupStyle));
-		}
-		
 		private static void BuildContextualMenu(ContextualMenuPopulateEvent evt) {}
-		
+
+		public GroupView() => styleSheets.Add(Resources.Load<StyleSheet>(groupStyle));
+
 		public void Initialize(BaseGraphView graphView, Group block)
 		{
 			group = block;
 			owner = graphView;
 
-            title = block.title;
-            SetPosition(block.position);
-			
+			title = block.title;
+			SetPosition(block.position);
+
 			this.AddManipulator(new ContextualMenuManipulator(BuildContextualMenu));
-			
-            headerContainer.Q<TextField>().RegisterCallback<ChangeEvent<string>>(TitleChangedCallback);
-            titleLabel = headerContainer.Q<Label>();
 
-            colorField = new ColorField{ value = group.color, name = "headerColorPicker" };
-            colorField.RegisterValueChangedCallback(e =>
-            {
-                UpdateGroupColor(e.newValue);
-            });
-            UpdateGroupColor(group.color);
+			headerContainer.Q<TextField>().RegisterCallback<ChangeEvent<string>>(TitleChangedCallback);
+			titleLabel = headerContainer.Q<Label>();
 
-            headerContainer.Add(colorField);
+			colorField = new ColorField { value = group.color, name = "headerColorPicker" };
+			colorField.RegisterValueChangedCallback(e => { UpdateGroupColor(e.newValue); });
+			UpdateGroupColor(group.color);
 
-            InitializeInnerNodes();
+			headerContainer.Add(colorField);
+
+			InitializeInnerNodes();
 		}
 
-        void InitializeInnerNodes()
-        {
-            foreach (var nodeGUID in group.innerNodeGUIDs.ToList())
-            {
-                if (!owner.graph.nodesPerGUID.ContainsKey(nodeGUID))
-                {
-                    Debug.LogWarning("Node GUID not found: " + nodeGUID);
-                    group.innerNodeGUIDs.Remove(nodeGUID);
-                    continue ;
-                }
-                var node = owner.graph.nodesPerGUID[nodeGUID];
-                var nodeView = owner.nodeViewsPerNode[node];
+		private void InitializeInnerNodes()
+		{
+			foreach (var nodeGUID in group.innerNodeGUIDs.ToList())
+			{
+				if (!owner.graph.nodesPerGUID.ContainsKey(nodeGUID))
+				{
+					Debug.LogWarning("Node GUID not found: " + nodeGUID);
+					group.innerNodeGUIDs.Remove(nodeGUID);
+					continue;
+				}
+				var node = owner.graph.nodesPerGUID[nodeGUID];
+				var nodeView = owner.nodeViewsPerNode[node];
 
-                AddElement(nodeView);
-            }
-        }
+				AddElement(nodeView);
+			}
+		}
 
-        protected override void OnElementsAdded(IEnumerable<GraphElement> elements)
-        {
-            foreach (var element in elements)
-            {
-                var node = element as BaseNodeView;
+		protected override void OnElementsAdded(IEnumerable<GraphElement> elements)
+		{
+			foreach (var element in elements)
+			{
+				var node = element as BaseNodeView;
 
-                // Adding an element that is not a node currently supported
-                if (node == null)
-                    continue;
+				// Adding an element that is not a node currently supported
+				if (node == null)
+					continue;
 
-                if (!group.innerNodeGUIDs.Contains(node.nodeTarget.GUID))
-                    group.innerNodeGUIDs.Add(node.nodeTarget.GUID);
-            }
-            base.OnElementsAdded(elements);
-        }
+				if (!group.innerNodeGUIDs.Contains(node.nodeTarget.GUID))
+					group.innerNodeGUIDs.Add(node.nodeTarget.GUID);
+			}
+			base.OnElementsAdded(elements);
+		}
 
-        protected override void OnElementsRemoved(IEnumerable<GraphElement> elements)
-        {
-            // Only remove the nodes when the group exists in the hierarchy
-            if (parent != null)
-            {
-                foreach (var elem in elements)
-                {
-                    if (elem is BaseNodeView nodeView)
-                    {
-                        group.innerNodeGUIDs.Remove(nodeView.nodeTarget.GUID);
-                    }
-                }
-            }
+		protected override void OnElementsRemoved(IEnumerable<GraphElement> elements)
+		{
+			// Only remove the nodes when the group exists in the hierarchy
+			if (parent != null)
+			{
+				foreach (var elem in elements)
+				{
+					if (elem is BaseNodeView nodeView)
+						group.innerNodeGUIDs.Remove(nodeView.nodeTarget.GUID);
+				}
+			}
 
-            base.OnElementsRemoved(elements);
-        }
+			base.OnElementsRemoved(elements);
+		}
 
-        public void UpdateGroupColor(Color newColor)
-        {
-            group.color = newColor;
-            style.backgroundColor = newColor;
-        }
+		public void UpdateGroupColor(Color newColor)
+		{
+			group.color = newColor;
+			style.backgroundColor = newColor;
+		}
 
-        void TitleChangedCallback(ChangeEvent< string > e)
-        {
-            group.title = e.newValue;
-        }
+		private void TitleChangedCallback(ChangeEvent<string> e) => group.title = e.newValue;
 
 		public override void SetPosition(Rect newPos)
 		{

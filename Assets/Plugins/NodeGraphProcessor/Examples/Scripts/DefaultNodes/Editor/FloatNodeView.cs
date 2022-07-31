@@ -1,11 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+﻿using GraphProcessor;
 using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
-using GraphProcessor;
 
 [NodeCustomEditor(typeof(FloatNode))]
 public class FloatNodeView : BaseNodeView
@@ -14,14 +9,15 @@ public class FloatNodeView : BaseNodeView
 	{
 		var floatNode = nodeTarget as FloatNode;
 
-		DoubleField floatField = new DoubleField
+		var floatField = new DoubleField
 		{
-			value = floatNode.input
+			value = floatNode.input,
 		};
 
 		floatNode.onProcessed += () => floatField.value = floatNode.input;
 
-		floatField.RegisterValueChangedCallback((v) => {
+		floatField.RegisterValueChangedCallback(v =>
+		{
 			owner.RegisterCompleteObjectUndo("Updated floatNode input");
 			floatNode.input = (float)v.newValue;
 		});

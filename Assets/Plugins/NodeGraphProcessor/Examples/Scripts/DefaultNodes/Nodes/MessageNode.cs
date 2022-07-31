@@ -1,21 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using GraphProcessor;
-using System.Linq;
+﻿using GraphProcessor;
+using System;
 
-[System.Serializable, NodeMenuItem("Custom/MessageNode")]
+[Serializable] [NodeMenuItem("Custom/MessageNode")]
 public class MessageNode : BaseNode
 {
-	const string k_InputIsNot42Error = "Input is not 42 !";
+	private const string k_InputIsNot42Error = "Input is not 42 !";
 
 	[Input(name = "In")]
-    public float                input;
-
-	public override string		name => "MessageNode";
+	public float input;
 
 	[Setting("Message Type")]
 	public NodeMessageType messageType = NodeMessageType.Error;
+
+	public override string name => "MessageNode";
 
 	protected override void Process()
 	{

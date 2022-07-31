@@ -1,18 +1,11 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
-using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
+﻿using GraphProcessor;
 using UnityEngine.UIElements;
-using GraphProcessor;
-using Unity.Jobs;
 
 [NodeCustomEditor(typeof(PrintNode))]
 public class PrintNodeView : BaseNodeView
 {
-	Label		printLabel;
-	PrintNode	printNode;
+	private Label printLabel;
+	private PrintNode printNode;
 
 	public override void Enable()
 	{
@@ -22,13 +15,13 @@ public class PrintNodeView : BaseNodeView
 		controlsContainer.Add(printLabel);
 
 		nodeTarget.onProcessed += UpdatePrintLabel;
-		onPortConnected += (p) => UpdatePrintLabel();
-		onPortDisconnected += (p) => UpdatePrintLabel();
+		onPortConnected += p => UpdatePrintLabel();
+		onPortDisconnected += p => UpdatePrintLabel();
 
 		UpdatePrintLabel();
 	}
 
-	void UpdatePrintLabel()
+	private void UpdatePrintLabel()
 	{
 		if (printNode.obj != null)
 			printLabel.text = printNode.obj.ToString();
@@ -40,8 +33,8 @@ public class PrintNodeView : BaseNodeView
 [NodeCustomEditor(typeof(ConditionalPrintNode))]
 public class ConditionalPrintNodeView : BaseNodeView
 {
-	Label		printLabel;
-	ConditionalPrintNode	printNode;
+	private Label printLabel;
+	private ConditionalPrintNode printNode;
 
 	public override void Enable()
 	{
@@ -51,13 +44,13 @@ public class ConditionalPrintNodeView : BaseNodeView
 		controlsContainer.Add(printLabel);
 
 		nodeTarget.onProcessed += UpdatePrintLabel;
-		onPortConnected += (p) => UpdatePrintLabel();
-		onPortDisconnected += (p) => UpdatePrintLabel();
+		onPortConnected += p => UpdatePrintLabel();
+		onPortDisconnected += p => UpdatePrintLabel();
 
 		UpdatePrintLabel();
 	}
 
-	void UpdatePrintLabel()
+	private void UpdatePrintLabel()
 	{
 		if (printNode.obj != null)
 			printLabel.text = printNode.obj.ToString();

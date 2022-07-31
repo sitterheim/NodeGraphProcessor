@@ -1,20 +1,22 @@
-using System.Collections.Generic;
-using System.Collections;
 using System;
+using System.Collections.Generic;
 
 namespace GraphProcessor
 {
 	public static class AppDomainExtension
 	{
-		public static IEnumerable< Type >	GetAllTypes(this AppDomain domain)
+		public static IEnumerable<Type> GetAllTypes(this AppDomain domain)
 		{
-            foreach (var assembly in domain.GetAssemblies())
-            {
+			foreach (var assembly in domain.GetAssemblies())
+			{
 				Type[] types = {};
-				
-                try {
+
+				try
+				{
 					types = assembly.GetTypes();
-				} catch {
+				}
+				catch
+				{
 					//just ignore it ...
 				}
 

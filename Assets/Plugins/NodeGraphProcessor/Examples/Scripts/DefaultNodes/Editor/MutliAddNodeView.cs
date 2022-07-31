@@ -1,11 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
+﻿using GraphProcessor;
 using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
-using GraphProcessor;
 
 [NodeCustomEditor(typeof(MultiAddNode))]
 public class MultiAddNodeView : BaseNodeView
@@ -14,9 +8,9 @@ public class MultiAddNodeView : BaseNodeView
 	{
 		var floatNode = nodeTarget as MultiAddNode;
 
-		DoubleField floatField = new DoubleField
+		var floatField = new DoubleField
 		{
-			value = floatNode.output
+			value = floatNode.output,
 		};
 
 		// Update the UI value after each processing

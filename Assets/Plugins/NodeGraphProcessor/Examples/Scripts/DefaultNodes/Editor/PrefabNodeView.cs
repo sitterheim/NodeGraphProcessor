@@ -1,11 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using GraphProcessor;
 using UnityEditor;
 using UnityEditor.UIElements;
-using UnityEditor.Experimental.GraphView;
+using UnityEngine;
 using UnityEngine.UIElements;
-using GraphProcessor;
 
 [NodeCustomEditor(typeof(PrefabNode))]
 public class PrefabNodeView : BaseNodeView
@@ -14,16 +11,17 @@ public class PrefabNodeView : BaseNodeView
 	{
 		var prefabNode = nodeTarget as PrefabNode;
 
-        var objField = new ObjectField
-        {
+		var objField = new ObjectField
+		{
 			objectType = typeof(GameObject),
 			allowSceneObjects = false,
-            value = prefabNode.output,
-        };
+			value = prefabNode.output,
+		};
 
 		var preview = new Image();
 
-		objField.RegisterValueChangedCallback(v => {
+		objField.RegisterValueChangedCallback(v =>
+		{
 			prefabNode.output = objField.value as GameObject;
 			UpdatePreviewImage(preview, objField.value);
 		});
@@ -34,8 +32,6 @@ public class PrefabNodeView : BaseNodeView
 		controlsContainer.Add(preview);
 	}
 
-	void		UpdatePreviewImage(Image image, Object obj)
-	{
+	private void UpdatePreviewImage(Image image, Object obj) =>
 		image.image = AssetPreview.GetAssetPreview(obj) ?? AssetPreview.GetMiniThumbnail(obj);
-	}
 }

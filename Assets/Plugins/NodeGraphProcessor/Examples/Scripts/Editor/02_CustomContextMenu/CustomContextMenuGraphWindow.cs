@@ -1,20 +1,18 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using GraphProcessor;
 using UnityEditor;
-using GraphProcessor;
+using UnityEngine;
 
 public class CustomContextMenuGraphWindow : BaseGraphWindow
 {
-	BaseGraph	tmpGraph;
+	private BaseGraph tmpGraph;
 
 	[MenuItem("Window/02 Custom Context Menu")]
 	public static BaseGraphWindow OpenWithTmpGraph()
 	{
-		var graphWindow = CreateWindow< CustomContextMenuGraphWindow >();
+		var graphWindow = CreateWindow<CustomContextMenuGraphWindow>();
 
 		// When the graph is opened from the window, we don't save the graph to disk
-		graphWindow.tmpGraph = ScriptableObject.CreateInstance<BaseGraph>();
+		graphWindow.tmpGraph = CreateInstance<BaseGraph>();
 		graphWindow.tmpGraph.hideFlags = HideFlags.HideAndDontSave;
 		graphWindow.InitializeGraph(graphWindow.tmpGraph);
 

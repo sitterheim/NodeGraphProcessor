@@ -1,26 +1,25 @@
 using UnityEditor.Experimental.GraphView;
-using UnityEngine.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace GraphProcessor
 {
 	public class EdgeView : Edge
 	{
-		public bool					isConnected = false;
+		private readonly string edgeStyle = "GraphProcessorStyles/EdgeView";
+		public bool isConnected = false;
 
-		public SerializableEdge		serializedEdge { get { return userData as SerializableEdge; } }
+		public SerializableEdge serializedEdge => userData as SerializableEdge;
 
-		readonly string				edgeStyle = "GraphProcessorStyles/EdgeView";
+		protected BaseGraphView owner => ((input ?? output) as PortView).owner.owner;
 
-		protected BaseGraphView		owner => ((input ?? output) as PortView).owner.owner;
-
-		public EdgeView() : base()
+		public EdgeView()
 		{
 			styleSheets.Add(Resources.Load<StyleSheet>(edgeStyle));
 			RegisterCallback<MouseDownEvent>(OnMouseDown);
 		}
 
-        public override void OnPortChanged(bool isInput)
+		public override void OnPortChanged(bool isInput)
 		{
 			base.OnPortChanged(isInput);
 			UpdateEdgeSize();
@@ -31,12 +30,12 @@ namespace GraphProcessor
 			if (input == null && output == null)
 				return;
 
-			PortData inputPortData = (input as PortView)?.portData;
-			PortData outputPortData = (output as PortView)?.portData;
+			var inputPortData = (input as PortView)?.portData;
+			var outputPortData = (output as PortView)?.portData;
 
-			for (int i = 1; i < 20; i++)
+			for (var i = 1; i < 20; i++)
 				RemoveFromClassList($"edge_{i}");
-			int maxPortSize = Mathf.Max(inputPortData?.sizeInPixel ?? 0, outputPortData?.sizeInPixel ?? 0);
+			var maxPortSize = Mathf.Max(inputPortData?.sizeInPixel ?? 0, outputPortData?.sizeInPixel ?? 0);
 			if (maxPortSize > 0)
 				AddToClassList($"edge_{Mathf.Max(1, maxPortSize - 6)}");
 		}
@@ -48,14 +47,14 @@ namespace GraphProcessor
 			UpdateEdgeControl();
 		}
 
-		void OnMouseDown(MouseDownEvent e)
+		private void OnMouseDown(MouseDownEvent e)
 		{
 			if (e.clickCount == 2)
 			{
 				// Empirical offset:
 				var position = e.mousePosition;
-                position += new Vector2(-10f, -28);
-                Vector2 mousePos = owner.ChangeCoordinatesTo(owner.contentViewContainer, position);
+				position += new Vector2(-10f, -28);
+				var mousePos = owner.ChangeCoordinatesTo(owner.contentViewContainer, position);
 
 				owner.AddRelayNode(input as PortView, output as PortView, mousePos);
 			}

@@ -1,16 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using GraphProcessor;
+﻿using GraphProcessor;
+using System;
 
-[System.Serializable, NodeMenuItem("Primitives/Float")]
+[Serializable] [NodeMenuItem("Primitives/Float")]
 public class FloatNode : BaseNode
 {
-    [Output("Out")]
-	public float		output;
-	
-    [Input("In")]
-	public float		input;
+	[Output("Out")]
+	public float output;
+
+	[Input("In")]
+	public float input;
 
 	public override string name => "Float";
 

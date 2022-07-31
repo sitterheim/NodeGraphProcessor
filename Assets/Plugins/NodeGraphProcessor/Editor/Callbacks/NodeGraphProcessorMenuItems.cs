@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEditor;
 using System.IO;
-using System.Reflection;
-using UnityEditor.ProjectWindowCallback;
+using UnityEditor;
+using UnityEngine;
 
 namespace GraphProcessor
 {
@@ -14,10 +10,11 @@ namespace GraphProcessor
 	/// </summary>
 	public class NodeGraphProcessorMenuItems
 	{
-		static readonly string		nodeBaseName = "Node.cs";
-		static readonly string		nodeViewBaseName = "NodeView.cs";
-        static string      _nodeTemplatePath = null;
-        static string      nodeTemplatePath
+		private static readonly string nodeBaseName = "Node.cs";
+		private static readonly string nodeViewBaseName = "NodeView.cs";
+		private static string _nodeTemplatePath;
+		private static string _nodeViewTemplatePath;
+		private static string nodeTemplatePath
 		{
 			get
 			{
@@ -29,8 +26,7 @@ namespace GraphProcessor
 				return _nodeTemplatePath;
 			}
 		}
-        static string      _nodeViewTemplatePath;
-        static string      nodeViewTemplatePath
+		private static string nodeViewTemplatePath
 		{
 			get
 			{
@@ -43,40 +39,36 @@ namespace GraphProcessor
 			}
 		}
 
-		protected static class MenuItemPosition
+		protected static string GetCurrentProjectWindowPath()
 		{
-			public const int afterCreateScript = 81;
-			public const int beforeCreateScript = 79;
-		}
-
-        protected static string GetCurrentProjectWindowPath()
-        {
 			var path = "";
 			var obj = Selection.activeObject;
 
 			if (obj == null)
-                return null;
-			else
-				path = AssetDatabase.GetAssetPath(obj.GetInstanceID());
+				return null;
+
+			path = AssetDatabase.GetAssetPath(obj.GetInstanceID());
 
 			if (path.Length > 0)
 			{
 				if (Directory.Exists(path))
 					return path;
-				else
-					return new FileInfo(path).Directory.FullName;
+
+				return new FileInfo(path).Directory.FullName;
 			}
 			return null;
-        }
-
-		protected static void CreateDefaultNodeCSharpScritpt()
-		{
-			ProjectWindowUtil.CreateScriptAssetFromTemplateFile(nodeTemplatePath, nodeBaseName);
 		}
 
-		protected static void CreateDefaultNodeViewCSharpScritpt()
-		{
+		protected static void CreateDefaultNodeCSharpScritpt() =>
+			ProjectWindowUtil.CreateScriptAssetFromTemplateFile(nodeTemplatePath, nodeBaseName);
+
+		protected static void CreateDefaultNodeViewCSharpScritpt() =>
 			ProjectWindowUtil.CreateScriptAssetFromTemplateFile(nodeViewTemplatePath, nodeViewBaseName);
+
+		protected static class MenuItemPosition
+		{
+			public const int afterCreateScript = 81;
+			public const int beforeCreateScript = 79;
 		}
 	}
 }
