@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// Custom editor of the node inspector, you can inherit from this class to customize your node inspector.

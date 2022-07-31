@@ -1,7 +1,7 @@
 using System;
 using System.Linq.Expressions;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	public static class TypeExtension
 	{

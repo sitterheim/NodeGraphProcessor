@@ -1,4 +1,4 @@
-using GraphProcessor;
+using NodeGraphProcessor;
 
 [NodeCustomEditor(typeof(ColorNode))]
 public class ColorNodeView : BaseNodeView

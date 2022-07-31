@@ -1,4 +1,4 @@
-﻿using GraphProcessor;
+﻿using NodeGraphProcessor;
 using UnityEngine;
 
 public class RuntimeGraph : MonoBehaviour

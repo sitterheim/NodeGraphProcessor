@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	[ExecuteAlways]
 	public class DeleteCallback : AssetModificationProcessor

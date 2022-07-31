@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	[Obsolete("Field Factory is not necessary anymore. You can use a SerializedProperty directly instead.")]
 	public static class FieldFactory

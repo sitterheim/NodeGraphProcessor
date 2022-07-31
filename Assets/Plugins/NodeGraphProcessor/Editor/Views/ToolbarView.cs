@@ -5,7 +5,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	public class ToolbarView : VisualElement
 	{

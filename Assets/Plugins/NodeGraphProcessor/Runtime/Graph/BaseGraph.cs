@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using Object = UnityEngine.Object;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	public class GraphChanges
 	{

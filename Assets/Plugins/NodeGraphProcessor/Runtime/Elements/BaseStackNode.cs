@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// Data container for the StackNode views

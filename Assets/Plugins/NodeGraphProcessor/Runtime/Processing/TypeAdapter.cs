@@ -4,7 +4,7 @@ using System.Linq;
 using System.Reflection;
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// Implement this interface to use the inside your class to define type convertions to use inside the graph.

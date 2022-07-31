@@ -1,4 +1,4 @@
-using GraphProcessor;
+using NodeGraphProcessor;
 using System;
 
 [Serializable] [NodeMenuItem("Custom/OutputNode")]

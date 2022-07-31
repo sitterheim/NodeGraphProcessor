@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	public static class ExceptionToLog
 	{

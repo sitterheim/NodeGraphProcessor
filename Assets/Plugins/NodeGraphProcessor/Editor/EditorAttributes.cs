@@ -1,6 +1,6 @@
 using System;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	[AttributeUsage(AttributeTargets.Class)]
 	public class NodeCustomEditor : Attribute

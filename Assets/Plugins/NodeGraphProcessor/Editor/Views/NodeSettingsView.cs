@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	internal class NodeSettingsView : VisualElement
 	{

@@ -2,7 +2,7 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// To add the menu items that create node C# script templates files you can inherit from this class and use it's API combined with [MenuItem]

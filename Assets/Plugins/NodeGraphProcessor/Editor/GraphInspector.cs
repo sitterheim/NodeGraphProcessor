@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	public class GraphInspector : Editor
 	{

@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	[Serializable]
 	public abstract class BaseGraphWindow : EditorWindow

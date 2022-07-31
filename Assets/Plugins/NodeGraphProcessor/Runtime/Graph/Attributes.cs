@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// Tell that this field is will generate an input port

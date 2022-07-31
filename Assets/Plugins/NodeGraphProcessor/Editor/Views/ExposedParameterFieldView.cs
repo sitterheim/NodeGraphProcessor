@@ -1,7 +1,7 @@
 using UnityEditor.Experimental.GraphView;
 using UnityEngine.UIElements;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	public class ExposedParameterFieldView : BlackboardField
 	{

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	public static class GraphUtils
 	{

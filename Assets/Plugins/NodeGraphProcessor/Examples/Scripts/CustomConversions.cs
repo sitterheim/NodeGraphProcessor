@@ -1,4 +1,4 @@
-using GraphProcessor;
+using NodeGraphProcessor;
 using NodeGraphProcessor.Examples;
 using System;
 using System.Collections.Generic;

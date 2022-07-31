@@ -1,4 +1,4 @@
-﻿using GraphProcessor;
+﻿using NodeGraphProcessor;
 using UnityEngine.UIElements;
 
 [NodeCustomEditor(typeof(SwitchNode))]

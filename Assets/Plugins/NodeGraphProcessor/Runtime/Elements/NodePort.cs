@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// Class that describe port attributes for it's creation

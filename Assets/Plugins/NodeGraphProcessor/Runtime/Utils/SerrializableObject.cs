@@ -5,7 +5,7 @@ using Object = UnityEngine.Object;
 #if UNITY_EDITOR
 #endif
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	// Warning: this class only support the serialization of UnityObject and primitive
 	[Serializable]

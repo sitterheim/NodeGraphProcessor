@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 using System.Reflection;
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	public delegate void CustomPortIODelegate(BaseNode node, List<SerializableEdge> edges, NodePort outputPort = null);
 

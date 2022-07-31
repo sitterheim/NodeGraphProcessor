@@ -1,4 +1,4 @@
-﻿using GraphProcessor;
+﻿using NodeGraphProcessor;
 using NodeGraphProcessor.Examples;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;

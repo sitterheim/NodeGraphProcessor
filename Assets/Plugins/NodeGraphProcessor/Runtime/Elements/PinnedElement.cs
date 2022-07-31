@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// Element that overlays the graph like the blackboard

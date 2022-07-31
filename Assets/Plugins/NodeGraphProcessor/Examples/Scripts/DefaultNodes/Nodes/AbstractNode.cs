@@ -1,4 +1,4 @@
-﻿using GraphProcessor;
+﻿using NodeGraphProcessor;
 using System;
 
 public abstract class AbstractNode : BaseNode

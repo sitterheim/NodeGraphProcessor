@@ -3,7 +3,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	// We need a drawer to display Vector4 on a single line because by default it's a toggle
 	[CustomPropertyDrawer(typeof(Vector4))]

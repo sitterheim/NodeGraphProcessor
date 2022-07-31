@@ -1,3 +1,3 @@
-using GraphProcessor;
+using NodeGraphProcessor;
 
 public class ExposedPropertiesGraph : BaseGraph {}

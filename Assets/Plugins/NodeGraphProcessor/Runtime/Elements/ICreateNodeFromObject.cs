@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// Implement this interface on a BaseNode, it allows you to automatically spawn a node if an asset of type T is dropped in the graphview area

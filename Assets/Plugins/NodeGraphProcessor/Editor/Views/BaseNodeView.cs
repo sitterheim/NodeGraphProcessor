@@ -12,7 +12,7 @@ using UnityEngine.UIElements;
 using NodeView = UnityEditor.Experimental.GraphView.Node;
 using Object = UnityEngine.Object;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	[NodeCustomEditor(typeof(BaseNode))]
 	public class BaseNodeView : NodeView

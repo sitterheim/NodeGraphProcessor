@@ -1,6 +1,6 @@
 ﻿// using Unity.Entities;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// Graph processor

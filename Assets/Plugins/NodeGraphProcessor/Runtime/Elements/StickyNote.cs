@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	/// <summary>
 	/// Serializable Sticky node class

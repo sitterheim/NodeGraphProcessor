@@ -3,7 +3,7 @@ using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	[CustomPropertyDrawer(typeof(ExposedParameter))]
 	public class ExposedParameterDrawer : PropertyDrawer

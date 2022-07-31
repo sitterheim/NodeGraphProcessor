@@ -6,7 +6,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace GraphProcessor
+namespace NodeGraphProcessor
 {
 	// TODO: replace this by the new UnityEditor.Searcher package
 	internal class CreateNodeMenuWindow : ScriptableObject, ISearchWindowProvider
