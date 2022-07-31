@@ -3,7 +3,7 @@ using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
 	/// <summary>
 	/// Stack node view implementation, can be used to stack multiple node inside a context like VFX graph does.

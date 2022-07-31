@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
 	[Serializable]
 	public class CopyPasteHelper

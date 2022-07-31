@@ -1,9 +1,9 @@
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
-	public class GraphInspector : Editor
+	public class GraphInspector : UnityEditor.Editor
 	{
 		protected VisualElement root;
 		protected BaseGraph graph;

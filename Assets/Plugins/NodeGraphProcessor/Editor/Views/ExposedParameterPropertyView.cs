@@ -1,6 +1,6 @@
 using UnityEngine.UIElements;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
 	public class ExposedParameterPropertyView : VisualElement
 	{

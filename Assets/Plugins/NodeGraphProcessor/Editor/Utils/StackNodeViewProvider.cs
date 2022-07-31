@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
 	public static class StackNodeViewProvider
 	{

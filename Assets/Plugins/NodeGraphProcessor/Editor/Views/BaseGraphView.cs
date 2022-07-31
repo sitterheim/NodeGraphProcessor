@@ -9,7 +9,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
 	/// <summary>
 	/// Base class to write a custom view for a node

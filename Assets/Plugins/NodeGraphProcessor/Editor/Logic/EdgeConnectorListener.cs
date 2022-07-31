@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
 	/// <summary>
 	/// Base class to write your own edge handling connection system

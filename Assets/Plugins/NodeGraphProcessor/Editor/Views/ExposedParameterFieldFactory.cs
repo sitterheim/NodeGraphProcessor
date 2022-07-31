@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
 	// So, this is a workaround class to add a wrapper around PropertyFields applied on [SerializeReference].
 	// Because Property Fields binding being extremely slow (https://forum.unity.com/threads/propertyfield-extremely-slow.966191/)

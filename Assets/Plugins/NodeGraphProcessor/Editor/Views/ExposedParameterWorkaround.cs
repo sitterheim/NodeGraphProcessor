@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
 	[Serializable]
 	public class ExposedParameterWorkaround : ScriptableObject

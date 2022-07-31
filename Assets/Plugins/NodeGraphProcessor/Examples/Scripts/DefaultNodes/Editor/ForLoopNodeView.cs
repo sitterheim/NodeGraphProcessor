@@ -1,4 +1,5 @@
 ﻿using NodeGraphProcessor;
+using NodeGraphProcessor.Editor;
 
 [NodeCustomEditor(typeof(ForLoopNode))]
 public class ForLoopNodeView : BaseNodeView

@@ -1,7 +1,7 @@
 ﻿using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
-namespace NodeGraphProcessor
+namespace NodeGraphProcessor.Editor
 {
 	public class MiniMapView : MiniMap
 	{

@@ -1,4 +1,5 @@
 ﻿using NodeGraphProcessor;
+using NodeGraphProcessor.Editor;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
