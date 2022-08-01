@@ -13,8 +13,8 @@ namespace NodeGraphProcessor
 	public abstract class BaseNode
 	{
 		public delegate void ProcessDelegate();
-		[SerializeField]
-		internal string nodeCustomName; // The name of the node in case it was renamed by a user
+
+		[SerializeField] internal string nodeCustomName; // The name of the node in case it was renamed by a user
 
 		//id
 		public string GUID;

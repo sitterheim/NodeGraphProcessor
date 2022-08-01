@@ -536,16 +536,16 @@ namespace NodeGraphProcessor.Editor
 		/// <summary>
 		/// Build the contextual menu shown when right clicking inside the graph view
 		/// </summary>
-		/// <param name="evt"></param>
-		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+		/// <param name="ev"></param>
+		public override void BuildContextualMenu(ContextualMenuPopulateEvent ev)
 		{
-			base.BuildContextualMenu(evt);
-			BuildGroupContextualMenu(evt, 1);
-			BuildStickyNoteContextualMenu(evt, 2);
-			BuildViewContextualMenu(evt);
-			BuildSelectAssetContextualMenu(evt);
-			BuildSaveAssetContextualMenu(evt);
-			BuildHelpContextualMenu(evt);
+			base.BuildContextualMenu(ev);
+			BuildGroupContextualMenu(ev, 1);
+			BuildStickyNoteContextualMenu(ev, 2);
+			BuildViewContextualMenu(ev);
+			BuildSelectAssetContextualMenu(ev);
+			BuildSaveAssetContextualMenu(ev);
+			BuildHelpContextualMenu(ev);
 		}
 
 		/// <summary>

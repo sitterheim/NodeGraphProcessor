@@ -4,24 +4,20 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[Serializable] [NodeMenuItem("Utils/Relay")]
+[Serializable] [NodeMenuItem("Dispatch/Relay")]
 public class RelayNode : BaseNode
 {
-	private const string packIdentifier = "_Pack";
+	private const string _PackIdentifier = "_Pack";
+	private const int _MaxPortSize = 14;
 
-	private const int k_MaxPortSize = 14;
-
-	private static List<(Type, string)> s_empty = new();
+	private static List<(Type, string)> _empty = new();
 
 	public bool unpackOutput;
 	public bool packInput;
 	public int inputEdgeCount;
 
-	[Input(name = "In")]
-	public PackedRelayData input;
-
-	[Output(name = "Out")]
-	public PackedRelayData output;
+	[Input(name = "In")] public PackedRelayData input;
+	[Output(name = "Out")] public PackedRelayData output;
 	[NonSerialized] private int outputIndex;
 
 	private SerializableType inputType = new(typeof(object));
@@ -61,7 +57,7 @@ public class RelayNode : BaseNode
 
 		var inputPortEdges = inputPorts[0].GetEdges();
 
-		if (outputPort.portData.identifier != packIdentifier && outputIndex >= 0 && (unpackOutput || inputPortEdges.Count == 1))
+		if (outputPort.portData.identifier != _PackIdentifier && outputIndex >= 0 && (unpackOutput || inputPortEdges.Count == 1))
 		{
 			if (output.values == null)
 				return;
@@ -107,7 +103,7 @@ public class RelayNode : BaseNode
 			displayType = inputType.type,
 			identifier = "0",
 			acceptMultipleEdges = true,
-			sizeInPixel = Mathf.Min(k_MaxPortSize, sizeInPixel + 8),
+			sizeInPixel = Mathf.Min(_MaxPortSize, sizeInPixel + 8),
 		};
 	}
 
@@ -135,10 +131,10 @@ public class RelayNode : BaseNode
 			yield return new PortData
 			{
 				displayName = "Pack",
-				identifier = packIdentifier,
+				identifier = _PackIdentifier,
 				displayType = inputType.type,
 				acceptMultipleEdges = true,
-				sizeInPixel = Mathf.Min(k_MaxPortSize, Mathf.Max(underlyingPortData.Count, 1) + 7), // TODO: function
+				sizeInPixel = Mathf.Min(_MaxPortSize, Mathf.Max(underlyingPortData.Count, 1) + 7), // TODO: function
 			};
 
 			// We still keep the packed data as output when unpacking just in case we want to continue the relay after unpacking
@@ -162,7 +158,7 @@ public class RelayNode : BaseNode
 				displayType = inputType.type,
 				identifier = "0",
 				acceptMultipleEdges = true,
-				sizeInPixel = Mathf.Min(k_MaxPortSize, Mathf.Max(underlyingPortData.Count, 1) + 7),
+				sizeInPixel = Mathf.Min(_MaxPortSize, Mathf.Max(underlyingPortData.Count, 1) + 7),
 			};
 		}
 	}
@@ -171,7 +167,7 @@ public class RelayNode : BaseNode
 	{
 		// get input edges:
 		if (inputPorts.Count == 0)
-			return s_empty;
+			return _empty;
 
 		var inputEdges = GetNonRelayEdges();
 
@@ -182,7 +178,7 @@ public class RelayNode : BaseNode
 				.ToList();
 		}
 
-		return s_empty;
+		return _empty;
 	}
 
 	public List<SerializableEdge> GetNonRelayEdges()
