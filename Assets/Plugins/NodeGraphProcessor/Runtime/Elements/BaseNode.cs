@@ -271,8 +271,10 @@ namespace NodeGraphProcessor
 				return level;
 			}
 
+#pragma warning disable 0675
 			// Order by MetadataToken and inheritance level to sync the order with the port order (make sure FieldDrawers are next to the correct port)
 			return fields.OrderByDescending(f => (GetFieldInheritanceLevel(f) << 32) | f.MetadataToken);
+#pragma warning restore 0675
 		}
 
 		/// <summary>
