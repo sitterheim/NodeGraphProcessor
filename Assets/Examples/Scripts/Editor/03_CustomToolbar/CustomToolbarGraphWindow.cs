@@ -24,7 +24,7 @@ public class CustomToolbarGraphWindow : BaseGraphWindow
 
 	protected override void OnDestroy()
 	{
-		graphView?.Dispose();
+		_graphView?.Dispose();
 		DestroyImmediate(tmpGraph);
 	}
 
@@ -32,12 +32,12 @@ public class CustomToolbarGraphWindow : BaseGraphWindow
 	{
 		titleContent = new GUIContent("Custom Toolbar Graph");
 
-		if (graphView == null)
+		if (_graphView == null)
 		{
-			graphView = new CustomToolbarGraphView(this);
-			graphView.Add(new CustomToolbarView(graphView));
+			_graphView = new CustomToolbarGraphView(this);
+			_graphView.Add(new CustomToolbarView(_graphView));
 		}
 
-		rootView.Add(graphView);
+		_rootView.Add(_graphView);
 	}
 }

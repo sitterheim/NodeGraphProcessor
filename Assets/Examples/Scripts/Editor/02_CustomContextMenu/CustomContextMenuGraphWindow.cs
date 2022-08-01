@@ -24,7 +24,7 @@ public class CustomContextMenuGraphWindow : BaseGraphWindow
 
 	protected override void OnDestroy()
 	{
-		graphView?.Dispose();
+		_graphView?.Dispose();
 		DestroyImmediate(tmpGraph);
 	}
 
@@ -32,12 +32,12 @@ public class CustomContextMenuGraphWindow : BaseGraphWindow
 	{
 		titleContent = new GUIContent("Context Menu Graph");
 
-		if (graphView == null)
+		if (_graphView == null)
 		{
-			graphView = new CustomContextMenuGraphView(this);
-			graphView.Add(new MiniMapView(graphView));
+			_graphView = new CustomContextMenuGraphView(this);
+			_graphView.Add(new MiniMapView(_graphView));
 		}
 
-		rootView.Add(graphView);
+		_rootView.Add(_graphView);
 	}
 }

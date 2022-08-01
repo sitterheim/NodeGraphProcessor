@@ -25,7 +25,7 @@ public class AllGraphWindow : BaseGraphWindow
 
 	protected override void OnDestroy()
 	{
-		graphView?.Dispose();
+		_graphView?.Dispose();
 		DestroyImmediate(tmpGraph);
 	}
 
@@ -33,14 +33,14 @@ public class AllGraphWindow : BaseGraphWindow
 	{
 		titleContent = new GUIContent("All Graph");
 
-		if (graphView == null)
+		if (_graphView == null)
 		{
-			graphView = new AllGraphView(this);
-			toolbarView = new CustomToolbarView(graphView);
-			graphView.Add(toolbarView);
+			_graphView = new AllGraphView(this);
+			toolbarView = new CustomToolbarView(_graphView);
+			_graphView.Add(toolbarView);
 		}
 
-		rootView.Add(graphView);
+		_rootView.Add(_graphView);
 	}
 
 	protected override void InitializeGraphView(BaseGraphView view)

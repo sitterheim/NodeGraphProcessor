@@ -1,7 +1,7 @@
 {
     "name": "com.codesmile.node-graph-processor",
     "version": "1.3.0",
-    "displayName": "NodeGraphProcessor (CodeSmile fork)",
+    "displayName": "NodeGraphProcessor",
     "description": "Node graph editor framework focused on data processing using Unity UI Elements. Original author: Antoine Lelievre. I forked it and adapted it to my own needs since commits stopped in October 2021.",
     "category": "Tools",
     "unity": "2020.3",

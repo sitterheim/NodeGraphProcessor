@@ -11,24 +11,23 @@ namespace NodeGraphProcessor.Editor
 	[Serializable]
 	public abstract class BaseGraphWindow : EditorWindow
 	{
-		[SerializeField]
-		protected BaseGraph graph;
+		[SerializeField] protected BaseGraph _graph;
 
-		private readonly string graphWindowStyle = "GraphProcessorStyles/BaseGraphView";
-		protected VisualElement rootView;
-		protected BaseGraphView graphView;
+		private readonly string _graphWindowStyle = "GraphProcessorStyles/BaseGraphView";
 
-		private bool reloadWorkaround;
+		protected VisualElement _rootView;
+		protected BaseGraphView _graphView;
+		private bool _reloadWorkaround;
 
 		protected virtual void Update()
 		{
 			// Workaround for the Refresh option of the editor window:
 			// When Refresh is clicked, OnEnable is called before the serialized data in the
 			// editor window is deserialized, causing the graph view to not be loaded
-			if (reloadWorkaround && graph != null)
+			if (_reloadWorkaround && _graph != null)
 			{
 				LoadGraph();
-				reloadWorkaround = false;
+				_reloadWorkaround = false;
 			}
 		}
 
@@ -39,10 +38,10 @@ namespace NodeGraphProcessor.Editor
 		{
 			InitializeRootView();
 
-			if (graph != null)
+			if (_graph != null)
 				LoadGraph();
 			else
-				reloadWorkaround = true;
+				_reloadWorkaround = true;
 		}
 
 		/// <summary>
@@ -50,8 +49,8 @@ namespace NodeGraphProcessor.Editor
 		/// </summary>
 		protected virtual void OnDisable()
 		{
-			if (graph != null && graphView != null)
-				graphView.SaveGraphToDisk();
+			if (_graph != null && _graphView != null)
+				_graphView.SaveGraphToDisk();
 		}
 
 		/// <summary>
@@ -59,7 +58,7 @@ namespace NodeGraphProcessor.Editor
 		/// </summary>
 		protected virtual void OnDestroy() {}
 
-		public bool isGraphLoaded => graphView != null && graphView.graph != null;
+		public bool isGraphLoaded => _graphView != null && _graphView.graph != null;
 
 		public event Action<BaseGraph> graphLoaded;
 		public event Action<BaseGraph> graphUnloaded;
@@ -67,52 +66,52 @@ namespace NodeGraphProcessor.Editor
 		private void LoadGraph()
 		{
 			// We wait for the graph to be initialized
-			if (graph.isEnabled)
-				InitializeGraph(graph);
+			if (_graph.isEnabled)
+				InitializeGraph(_graph);
 			else
-				graph.onEnabled += () => InitializeGraph(graph);
+				_graph.onEnabled += () => InitializeGraph(_graph);
 		}
 
 		private void InitializeRootView()
 		{
-			rootView = rootVisualElement;
+			_rootView = rootVisualElement;
 
-			rootView.name = "graphRootView";
+			_rootView.name = "graphRootView";
 
-			rootView.styleSheets.Add(Resources.Load<StyleSheet>(graphWindowStyle));
+			_rootView.styleSheets.Add(Resources.Load<StyleSheet>(_graphWindowStyle));
 		}
 
 		public void InitializeGraph(BaseGraph graph)
 		{
-			if (this.graph != null && graph != this.graph)
+			if (_graph != null && graph != _graph)
 			{
 				// Save the graph to the disk
-				EditorUtility.SetDirty(this.graph);
+				EditorUtility.SetDirty(_graph);
 				AssetDatabase.SaveAssets();
 				// Unload the graph
-				graphUnloaded?.Invoke(this.graph);
+				graphUnloaded?.Invoke(_graph);
 			}
 
 			graphLoaded?.Invoke(graph);
-			this.graph = graph;
+			_graph = graph;
 
-			if (graphView != null)
-				rootView.Remove(graphView);
+			if (_graphView != null)
+				_rootView.Remove(_graphView);
 
 			//Initialize will provide the BaseGraphView
 			InitializeWindow(graph);
 
-			graphView = rootView.Children().FirstOrDefault(e => e is BaseGraphView) as BaseGraphView;
+			_graphView = _rootView.Children().FirstOrDefault(e => e is BaseGraphView) as BaseGraphView;
 
-			if (graphView == null)
+			if (_graphView == null)
 			{
 				Debug.LogError("GraphView has not been added to the BaseGraph root view !");
 				return;
 			}
 
-			graphView.Initialize(graph);
+			_graphView.Initialize(graph);
 
-			InitializeGraphView(graphView);
+			InitializeGraphView(_graphView);
 
 			// TOOD: onSceneLinked...
 
@@ -138,10 +137,10 @@ namespace NodeGraphProcessor.Editor
 
 		public virtual void OnGraphDeleted()
 		{
-			if (graph != null && graphView != null)
-				rootView.Remove(graphView);
+			if (_graph != null && _graphView != null)
+				_rootView.Remove(_graphView);
 
-			graphView = null;
+			_graphView = null;
 		}
 
 		protected abstract void InitializeWindow(BaseGraph graph);

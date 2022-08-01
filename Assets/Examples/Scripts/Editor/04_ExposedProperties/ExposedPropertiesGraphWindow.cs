@@ -24,7 +24,7 @@ public class ExposedPropertiesGraphWindow : BaseGraphWindow
 
 	protected override void OnDestroy()
 	{
-		graphView?.Dispose();
+		_graphView?.Dispose();
 		DestroyImmediate(tmpGraph);
 	}
 
@@ -32,10 +32,10 @@ public class ExposedPropertiesGraphWindow : BaseGraphWindow
 	{
 		titleContent = new GUIContent("Properties Graph");
 
-		if (graphView == null)
-			graphView = new ExposedPropertiesGraphView(this);
+		if (_graphView == null)
+			_graphView = new ExposedPropertiesGraphView(this);
 
-		rootView.Add(graphView);
+		_rootView.Add(_graphView);
 	}
 
 	protected override void InitializeGraphView(BaseGraphView view) => view.OpenPinned<ExposedParameterView>();

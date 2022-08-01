@@ -24,7 +24,7 @@ public class DefaultGraphWindow : BaseGraphWindow
 
 	protected override void OnDestroy()
 	{
-		graphView?.Dispose();
+		_graphView?.Dispose();
 		DestroyImmediate(tmpGraph);
 	}
 
@@ -32,9 +32,9 @@ public class DefaultGraphWindow : BaseGraphWindow
 	{
 		titleContent = new GUIContent("Default Graph");
 
-		if (graphView == null)
-			graphView = new BaseGraphView(this);
+		if (_graphView == null)
+			_graphView = new BaseGraphView(this);
 
-		rootView.Add(graphView);
+		_rootView.Add(_graphView);
 	}
 }
