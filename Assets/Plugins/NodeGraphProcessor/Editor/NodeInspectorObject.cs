@@ -12,6 +12,7 @@ namespace NodeGraphProcessor.Editor
 	{
 		/// <summary>Previously selected object by the inspector</summary>
 		public Object previouslySelectedObject;
+		
 		/// <summary>List of currently selected nodes</summary>
 		public HashSet<BaseNodeView> selectedNodes { get; private set; } = new();
 

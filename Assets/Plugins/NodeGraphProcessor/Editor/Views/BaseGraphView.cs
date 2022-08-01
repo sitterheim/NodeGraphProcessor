@@ -182,11 +182,11 @@ namespace NodeGraphProcessor.Editor
 				var exceptInheritedInterfaces = interfaces.Except(interfaces.SelectMany(t => t.GetInterfaces()));
 				foreach (var i in interfaces)
 				{
-					if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(ICreateNodeFrom<>))
+					if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDropCreatesNode<>))
 					{
 						var genericArgumentType = i.GetGenericArguments()[0];
 						var initializeFunction = nodeInfo.type.GetMethod(
-							nameof(ICreateNodeFrom<Object>.InitializeNodeFromObject),
+							nameof(IDropCreatesNode<Object>.InitializeNodeFromObject),
 							BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance,
 							null, new[] { genericArgumentType }, null
 						);

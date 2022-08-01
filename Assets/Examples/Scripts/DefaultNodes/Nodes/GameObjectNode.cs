@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 
 [Serializable] [NodeMenuItem("Custom/Game Object")]
-public class GameObjectNode : BaseNode, ICreateNodeFrom<GameObject>
+public class GameObjectNode : BaseNode, IDropCreatesNode<GameObject>
 {
 	[Output(name = "Out")] [SerializeField]
 	public GameObject output;
