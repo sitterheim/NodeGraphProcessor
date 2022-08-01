@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace NodeGraphProcessor
 {
-	public static class ExceptionToLog
+	public static class CatchAllExceptions
 	{
-		public static void Call(Action a)
+		public static void Run(Action a)
 		{
 #if UNITY_EDITOR
 			try

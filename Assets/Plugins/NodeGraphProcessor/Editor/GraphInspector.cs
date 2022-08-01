@@ -35,12 +35,14 @@ namespace NodeGraphProcessor.Editor
 			return root;
 		}
 
+		private VisualElement CreateContainer()
+		{
+			return new VisualElement { name = "ExposedParameters" };
+		}
+		
 		protected virtual void CreateInspector()
 		{
-			parameterContainer = new VisualElement
-			{
-				name = "ExposedParameters",
-			};
+			parameterContainer = CreateContainer();
 			FillExposedParameters(parameterContainer);
 
 			root.Add(parameterContainer);
@@ -70,6 +72,9 @@ namespace NodeGraphProcessor.Editor
 
 		private void UpdateExposedParameters()
 		{
+			if (parameterContainer == null)
+				parameterContainer = CreateContainer();
+			
 			parameterContainer.Clear();
 			FillExposedParameters(parameterContainer);
 		}

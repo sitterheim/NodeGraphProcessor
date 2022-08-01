@@ -19,7 +19,7 @@ public class CustomContextMenuGraphView : BaseGraphView
 			var mousePos = (evt.currentTarget as VisualElement).ChangeCoordinatesTo(contentViewContainer, evt.localMousePosition);
 			var nodePosition = mousePos;
 			evt.menu.AppendAction("Create/" + nodeMenuItem.path,
-				e => CreateNodeOfType(nodeMenuItem.type, nodePosition),
+				e => CreateNode(nodeMenuItem.type, nodePosition),
 				DropdownMenuAction.AlwaysEnabled
 			);
 		}
@@ -27,7 +27,7 @@ public class CustomContextMenuGraphView : BaseGraphView
 		base.BuildContextualMenu(evt);
 	}
 
-	private void CreateNodeOfType(Type type, Vector2 position)
+	private void CreateNode(Type type, Vector2 position)
 	{
 		RegisterCompleteObjectUndo("Added " + type + " node");
 		AddNode(BaseNode.CreateFromType(type, position));

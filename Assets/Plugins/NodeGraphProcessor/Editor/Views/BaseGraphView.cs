@@ -438,7 +438,7 @@ namespace NodeGraphProcessor.Editor
 							}
 
 							nodeInspector.NodeViewRemoved(nodeView);
-							ExceptionToLog.Call(() => nodeView.OnRemoved());
+							CatchAllExceptions.Run(() => nodeView.OnRemoved());
 							graph.RemoveNode(nodeView.nodeTarget);
 							UpdateSerializedProperties();
 							RemoveElement(nodeView);
@@ -931,7 +931,7 @@ namespace NodeGraphProcessor.Editor
 			var view = AddNodeView(node);
 
 			// Call create after the node have been initialized
-			ExceptionToLog.Call(() => view.OnCreated());
+			CatchAllExceptions.Run(() => view.OnCreated());
 
 			UpdateComputeOrder();
 

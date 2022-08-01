@@ -89,7 +89,7 @@ namespace NodeGraphProcessor
 
 			node.position = new Rect(position, new Vector2(100, 100));
 
-			ExceptionToLog.Call(() => node.OnNodeCreated());
+			CatchAllExceptions.Run(() => node.OnNodeCreated());
 
 			return node;
 		}
@@ -107,7 +107,7 @@ namespace NodeGraphProcessor
 		{
 			this.graph = graph;
 
-			ExceptionToLog.Call(() => Enable());
+			CatchAllExceptions.Run(() => Enable());
 
 			InitializePorts();
 		}
@@ -480,10 +480,10 @@ namespace NodeGraphProcessor
 			inputPorts.Clear();
 			outputPorts.Clear();
 
-			ExceptionToLog.Call(() => Disable());
+			CatchAllExceptions.Run(() => Disable());
 		}
 
-		internal void DestroyInternal() => ExceptionToLog.Call(() => Destroy());
+		internal void DestroyInternal() => CatchAllExceptions.Run(() => Destroy());
 
 		/// <summary>
 		/// Called only when the node is created, not when instantiated
@@ -595,7 +595,7 @@ namespace NodeGraphProcessor
 		{
 			inputPorts.PullDatas();
 
-			ExceptionToLog.Call(() => Process());
+			CatchAllExceptions.Run(() => Process());
 
 			InvokeOnProcessed();
 

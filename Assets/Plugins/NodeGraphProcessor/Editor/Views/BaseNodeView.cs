@@ -118,9 +118,9 @@ namespace NodeGraphProcessor.Editor
 
 			// If the standard Enable method is still overwritten, we call it
 			if (GetType().GetMethod(nameof(Enable), new Type[] {}).DeclaringType != typeof(BaseNodeView))
-				ExceptionToLog.Call(() => Enable());
+				CatchAllExceptions.Run(() => Enable());
 			else
-				ExceptionToLog.Call(() => Enable(false));
+				CatchAllExceptions.Run(() => Enable(false));
 
 			InitializeSettings();
 
@@ -129,7 +129,7 @@ namespace NodeGraphProcessor.Editor
 			RefreshPorts();
 
 			RegisterCallback<GeometryChangedEvent>(OnGeometryChanged);
-			RegisterCallback<DetachFromPanelEvent>(e => ExceptionToLog.Call(Disable));
+			RegisterCallback<DetachFromPanelEvent>(e => CatchAllExceptions.Run(Disable));
 			OnGeometryChanged(null);
 		}
 
