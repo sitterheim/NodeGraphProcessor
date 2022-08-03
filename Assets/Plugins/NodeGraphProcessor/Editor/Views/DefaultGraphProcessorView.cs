@@ -2,16 +2,15 @@
 
 namespace NodeGraphProcessor.Editor
 {
-	public class ProcessorView : PinnedElementView
+	public class ProcessGraphProcessorView : PinnedElementView
 	{
 		private BaseGraphProcessor processor;
 
-		public ProcessorView() => title = "Process panel";
+		public ProcessGraphProcessorView() => title = "Process panel";
 
 		protected override void Initialize(BaseGraphView graphView)
 		{
-			processor = new ProcessGraphProcessor(graphView.graph);
-
+			processor = new DefaultGraphProcessor(graphView.graph);
 			graphView.computeOrderUpdated += processor.UpdateComputeOrder;
 
 			var b = new Button(OnPlay) { name = "ActionButton", text = "Play !" };

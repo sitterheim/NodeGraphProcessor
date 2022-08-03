@@ -581,7 +581,7 @@ namespace NodeGraphProcessor.Editor
 		/// </summary>
 		/// <param name="evt"></param>
 		protected virtual void BuildViewContextualMenu(ContextualMenuPopulateEvent evt) => evt.menu.AppendAction("View/Processor",
-			e => ToggleView<ProcessorView>(), e => GetPinnedElementStatus<ProcessorView>());
+			e => ToggleView<ProcessGraphProcessorView>(), e => GetPinnedElementStatus<ProcessGraphProcessorView>());
 
 		/// <summary>
 		/// Add the Select Asset entry to the context menu
