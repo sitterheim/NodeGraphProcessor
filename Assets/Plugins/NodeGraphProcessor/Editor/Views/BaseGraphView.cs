@@ -581,7 +581,7 @@ namespace NodeGraphProcessor.Editor
 		/// </summary>
 		/// <param name="evt"></param>
 		protected virtual void BuildViewContextualMenu(ContextualMenuPopulateEvent evt) => evt.menu.AppendAction("View/Processor",
-			e => ToggleView<ProcessGraphProcessorView>(), e => GetPinnedElementStatus<ProcessGraphProcessorView>());
+			e => ToggleView<DefaultGraphProcessorView>(), e => GetPinnedElementStatus<DefaultGraphProcessorView>());
 
 		/// <summary>
 		/// Add the Select Asset entry to the context menu
@@ -604,7 +604,7 @@ namespace NodeGraphProcessor.Editor
 		/// Add the Help entry to the context menu
 		/// </summary>
 		/// <param name="evt"></param>
-		protected void BuildHelpContextualMenu(ContextualMenuPopulateEvent evt) => evt.menu.AppendAction("Help/Reset Pinned Windows", e =>
+		protected void BuildHelpContextualMenu(ContextualMenuPopulateEvent evt) => evt.menu.AppendAction("Reset/Reset Pinned Windows", e =>
 		{
 			foreach (var kp in pinnedElements)
 				kp.Value.ResetPosition();

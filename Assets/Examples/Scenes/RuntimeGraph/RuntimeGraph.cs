@@ -6,14 +6,14 @@ public class RuntimeGraph : MonoBehaviour
 	public BaseGraph graph;
 
 	public GameObject assignedGameObject;
-	public ProcessGraphProcessor processor;
+	public DefaultGraphProcessor processor;
 
 	private int i;
 
 	private void Start()
 	{
 		if (graph != null)
-			processor = new ProcessGraphProcessor(graph);
+			processor = new DefaultGraphProcessor(graph);
 	}
 
 	private void Update()

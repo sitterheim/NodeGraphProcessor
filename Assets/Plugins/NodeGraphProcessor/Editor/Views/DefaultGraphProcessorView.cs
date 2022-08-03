@@ -2,11 +2,11 @@
 
 namespace NodeGraphProcessor.Editor
 {
-	public class ProcessGraphProcessorView : PinnedElementView
+	public class DefaultGraphProcessorView : PinnedElementView
 	{
 		private BaseGraphProcessor processor;
 
-		public ProcessGraphProcessorView() => title = "Process panel";
+		public DefaultGraphProcessorView() => title = "Process panel";
 
 		protected override void Initialize(BaseGraphView graphView)
 		{

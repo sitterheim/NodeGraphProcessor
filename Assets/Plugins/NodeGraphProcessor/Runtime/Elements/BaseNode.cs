@@ -376,8 +376,7 @@ namespace NodeGraphProcessor
 				finalPorts.Add(portData.identifier);
 			}
 
-			// TODO
-			// Remove only the ports that are no more in the list
+			// TODO: Remove only the ports that are no more in the list
 			if (nodePorts != null)
 			{
 				var currentPortsCopy = nodePorts.ToList();

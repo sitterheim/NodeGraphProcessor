@@ -8,7 +8,7 @@ namespace NodeGraphProcessor
 	/// <summary>
 	/// Graph processor
 	/// </summary>
-	public class ProcessGraphProcessor : BaseGraphProcessor
+	public class DefaultGraphProcessor : BaseGraphProcessor
 	{
 		private List<BaseNode> processList;
 
@@ -16,7 +16,7 @@ namespace NodeGraphProcessor
 		/// Manage graph scheduling and processing
 		/// </summary>
 		/// <param name="graph">Graph to be processed</param>
-		public ProcessGraphProcessor(BaseGraph graph)
+		public DefaultGraphProcessor(BaseGraph graph)
 			: base(graph) {}
 
 		public override void UpdateComputeOrder() => processList = graph.nodes.OrderBy(n => n.computeOrder).ToList();

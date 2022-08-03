@@ -139,8 +139,8 @@ namespace NodeGraphProcessor.Editor
 		{
 			AddButton("Center", graphView.ResetPositionAndZoom);
 
-			var processorVisible = graphView.GetPinnedElementStatus<ProcessGraphProcessorView>() != DropdownMenuAction.Status.Hidden;
-			showProcessor = AddToggle("Show Processor", processorVisible, v => graphView.ToggleView<ProcessGraphProcessorView>());
+			var processorVisible = graphView.GetPinnedElementStatus<DefaultGraphProcessorView>() != DropdownMenuAction.Status.Hidden;
+			showProcessor = AddToggle("Show Processor", processorVisible, v => graphView.ToggleView<DefaultGraphProcessorView>());
 			var exposedParamsVisible = graphView.GetPinnedElementStatus<ExposedParameterView>() != DropdownMenuAction.Status.Hidden;
 			showParameters = AddToggle("Show Parameters", exposedParamsVisible, v => graphView.ToggleView<ExposedParameterView>());
 
@@ -150,7 +150,7 @@ namespace NodeGraphProcessor.Editor
 		public virtual void UpdateButtonStatus()
 		{
 			if (showProcessor != null)
-				showProcessor.value = graphView.GetPinnedElementStatus<ProcessGraphProcessorView>() != DropdownMenuAction.Status.Hidden;
+				showProcessor.value = graphView.GetPinnedElementStatus<DefaultGraphProcessorView>() != DropdownMenuAction.Status.Hidden;
 			if (showParameters != null)
 				showParameters.value = graphView.GetPinnedElementStatus<ExposedParameterView>() != DropdownMenuAction.Status.Hidden;
 		}
