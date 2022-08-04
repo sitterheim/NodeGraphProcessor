@@ -772,7 +772,7 @@ namespace NodeGraphProcessor.Editor
 			RemoveEdges();
 			RemoveGroups();
 #if UNITY_2020_1_OR_NEWER
-			RemoveStrickyNotes();
+			RemoveStickyNotes();
 #endif
 			RemoveStackNodeViews();
 
@@ -805,7 +805,7 @@ namespace NodeGraphProcessor.Editor
 			RemoveStackNodeViews();
 			RemovePinnedElementViews();
 #if UNITY_2020_1_OR_NEWER
-			RemoveStrickyNotes();
+			RemoveStickyNotes();
 #endif
 		}
 
@@ -1358,7 +1358,7 @@ namespace NodeGraphProcessor.Editor
 			RemoveElement(view);
 		}
 
-		public void RemoveStrickyNotes()
+		public void RemoveStickyNotes()
 		{
 			foreach (var stickyNodeView in stickyNoteViews)
 				RemoveElement(stickyNodeView);

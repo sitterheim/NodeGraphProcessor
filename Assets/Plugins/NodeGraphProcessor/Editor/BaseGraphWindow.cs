@@ -75,9 +75,7 @@ namespace NodeGraphProcessor.Editor
 		private void InitializeRootView()
 		{
 			_rootView = rootVisualElement;
-
 			_rootView.name = "graphRootView";
-
 			_rootView.styleSheets.Add(Resources.Load<StyleSheet>(_graphWindowStyle));
 		}
 
