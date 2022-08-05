@@ -434,7 +434,7 @@ namespace NodeGraphProcessor
 			fieldsToUpdate.Push(new PortUpdate { fieldNames = new List<string> { fieldName }, node = this });
 
 			// Iterate through all the ports that needs to be updated, following graph connection when the 
-			// port is updated. This is required ton have type propagation multiple nodes that changes port types
+			// port is updated. This is required to have type propagation multiple nodes that changes port types
 			// are connected to each other (i.e. the relay node)
 			while (fieldsToUpdate.Count != 0)
 			{

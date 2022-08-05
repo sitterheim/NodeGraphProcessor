@@ -636,6 +636,7 @@ namespace NodeGraphProcessor.Editor
 			computeOrderLabel.text = "Compute order: " + nodeTarget.computeOrder;
 
 		public virtual void Enable(bool fromInspector = false) => DrawDefaultInspector(fromInspector);
+
 		public virtual void Enable() => DrawDefaultInspector();
 
 		public virtual void Disable() {}

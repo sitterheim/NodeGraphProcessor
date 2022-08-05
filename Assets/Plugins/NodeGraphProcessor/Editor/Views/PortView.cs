@@ -102,7 +102,7 @@ namespace NodeGraphProcessor.Editor
 		/// </summary>
 		public void UpdatePortSize()
 		{
-			var size = portData.sizeInPixel == 0 ? 8 : portData.sizeInPixel;
+			var size = portData.sizeInPixel == 0 ? 9 : portData.sizeInPixel;
 			var connector = this.Q("connector");
 			var cap = connector.Q("cap");
 			connector.style.width = size;

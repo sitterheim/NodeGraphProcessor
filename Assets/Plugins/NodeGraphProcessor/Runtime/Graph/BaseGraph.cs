@@ -531,22 +531,13 @@ namespace NodeGraphProcessor
 		/// Update the compute order of the nodes in the graph
 		/// </summary>
 		/// <param name="type">Compute order type</param>
-		public void UpdateComputeOrder(ComputeOrderType type = ComputeOrderType.DepthFirst)
+		public virtual void UpdateComputeOrder(ComputeOrderType type = ComputeOrderType.DepthFirst)
 		{
 			if (nodes.Count == 0)
 				return;
 
 			// Find graph outputs (end nodes) and reset compute order
-			graphOutputs.Clear();
-			foreach (var node in nodes)
-			{
-				if (node.GetOutputNodes().Count() == 0)
-					graphOutputs.Add(node);
-				node.computeOrder = 0;
-			}
-
-			computeOrderDictionary.Clear();
-			infiniteLoopTracker.Clear();
+			ResetComputeOrder();
 
 			switch (type)
 			{
@@ -559,6 +550,20 @@ namespace NodeGraphProcessor
 						UpdateComputeOrderBreadthFirst(0, node);
 					break;
 			}
+		}
+
+		protected void ResetComputeOrder()
+		{
+			graphOutputs.Clear();
+			foreach (var node in nodes)
+			{
+				if (node.GetOutputNodes().Count() == 0)
+					graphOutputs.Add(node);
+				node.computeOrder = 0;
+			}
+
+			computeOrderDictionary.Clear();
+			infiniteLoopTracker.Clear();
 		}
 
 		/// <summary>
@@ -736,7 +741,7 @@ namespace NodeGraphProcessor
 		/// </summary>
 		public Scene GetLinkedScene() => linkedScene;
 
-		private int UpdateComputeOrderBreadthFirst(int depth, BaseNode node)
+		protected int UpdateComputeOrderBreadthFirst(int depth, BaseNode node)
 		{
 			var computeOrder = 0;
 
@@ -781,7 +786,7 @@ namespace NodeGraphProcessor
 			return computeOrder;
 		}
 
-		private void UpdateComputeOrderDepthFirst()
+		protected void UpdateComputeOrderDepthFirst()
 		{
 			var dfs = new Stack<BaseNode>();
 

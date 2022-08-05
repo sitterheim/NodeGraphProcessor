@@ -11,60 +11,6 @@ using UnityEngine;
 namespace NodeGraphProcessor
 {
 	/// <summary>
-	/// Class that describe port attributes for it's creation
-	/// </summary>
-	public class PortData : IEquatable<PortData>
-	{
-		/// <summary>
-		/// Unique identifier for the port
-		/// </summary>
-		public string identifier;
-		/// <summary>
-		/// Display name on the node
-		/// </summary>
-		public string displayName;
-		/// <summary>
-		/// The type that will be used for coloring with the type stylesheet
-		/// </summary>
-		public Type displayType;
-		/// <summary>
-		/// If the port accept multiple connection
-		/// </summary>
-		public bool acceptMultipleEdges;
-		/// <summary>
-		/// Port size, will also affect the size of the connected edge
-		/// </summary>
-		public int sizeInPixel;
-		/// <summary>
-		/// Tooltip of the port
-		/// </summary>
-		public string tooltip;
-		/// <summary>
-		/// Is the port vertical
-		/// </summary>
-		public bool vertical;
-
-		public bool Equals(PortData other) => identifier == other.identifier
-		                                      && displayName == other.displayName
-		                                      && displayType == other.displayType
-		                                      && acceptMultipleEdges == other.acceptMultipleEdges
-		                                      && sizeInPixel == other.sizeInPixel
-		                                      && tooltip == other.tooltip
-		                                      && vertical == other.vertical;
-
-		public void CopyFrom(PortData other)
-		{
-			identifier = other.identifier;
-			displayName = other.displayName;
-			displayType = other.displayType;
-			acceptMultipleEdges = other.acceptMultipleEdges;
-			sizeInPixel = other.sizeInPixel;
-			tooltip = other.tooltip;
-			vertical = other.vertical;
-		}
-	}
-
-	/// <summary>
 	/// Runtime class that stores all info about one port that is needed for the processing
 	/// </summary>
 	public class NodePort
@@ -134,6 +80,8 @@ namespace NodeGraphProcessor
 			customPortIOMethod = CustomPortIO.GetCustomPortMethod(owner.GetType(), fieldName);
 		}
 
+		public override string ToString() => $"{portData.displayName} port in {owner.name} ({owner.GetType().Name}.{fieldName}) - Edges: {edges.Count}";
+
 		/// <summary>
 		/// Connect an edge to this port
 		/// </summary>
@@ -199,7 +147,7 @@ namespace NodeGraphProcessor
 				if (!BaseGraph.TypesAreConnectable(inputField.FieldType, outputField.FieldType))
 				{
 					Debug.LogError("Can't convert from " + inputField.FieldType + " to " + outputField.FieldType +
-					               ", you must specify a custom port function (i.e CustomPortInput or CustomPortOutput) for non-implicit convertions");
+					               ", you must specify a custom port function (i.e CustomPortInput or CustomPortOutput) for non-implicit conversions");
 					return null;
 				}
 #endif
