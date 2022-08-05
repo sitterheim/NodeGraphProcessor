@@ -197,7 +197,7 @@ namespace NodeGraphProcessor
 				methods = baseType.GetMethods(BindingFlags.NonPublic | BindingFlags.Instance);
 				foreach (var method in methods)
 				{
-					var typeBehaviors = method.GetCustomAttributes<CustomPortTypeBehavior>().ToArray();
+					var typeBehaviors = method.GetCustomAttributes<CustomPortTypeBehaviourAttribute>().ToArray();
 
 					if (typeBehaviors.Length == 0)
 						continue;
@@ -502,7 +502,7 @@ namespace NodeGraphProcessor
 				var inputAttribute = field.GetCustomAttribute<InputAttribute>();
 				var outputAttribute = field.GetCustomAttribute<OutputAttribute>();
 				var tooltipAttribute = field.GetCustomAttribute<TooltipAttribute>();
-				var showInInspector = field.GetCustomAttribute<ShowInInspector>();
+				var showInInspector = field.GetCustomAttribute<ShowInInspectorAttribute>();
 				var vertical = field.GetCustomAttribute<VerticalAttribute>();
 				var isMultiple = false;
 				var input = false;
@@ -531,7 +531,7 @@ namespace NodeGraphProcessor
 
 			foreach (var method in methods)
 			{
-				var customPortBehaviorAttribute = method.GetCustomAttribute<CustomPortBehaviorAttribute>();
+				var customPortBehaviorAttribute = method.GetCustomAttribute<CustomPortBehaviourAttribute>();
 				CustomPortBehaviorDelegate behavior = null;
 
 				if (customPortBehaviorAttribute == null)

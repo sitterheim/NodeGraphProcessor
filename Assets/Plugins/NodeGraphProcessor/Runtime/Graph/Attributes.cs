@@ -71,22 +71,6 @@ namespace NodeGraphProcessor
 	}
 
 	/// <summary>
-	/// Set a custom drawer for a field. It can then be created using the FieldFactory
-	/// </summary>
-	[AttributeUsage(AttributeTargets.Class)]
-	[Obsolete("You can use the standard Unity CustomPropertyDrawer instead.")]
-	public class FieldDrawerAttribute : Attribute
-	{
-		public Type fieldType;
-
-		/// <summary>
-		/// Register a custom view for a type in the FieldFactory class
-		/// </summary>
-		/// <param name="fieldType"></param>
-		public FieldDrawerAttribute(Type fieldType) => this.fieldType = fieldType;
-	}
-
-	/// <summary>
 	/// Allow you to customize the input function of a port
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Method)]
@@ -140,7 +124,7 @@ namespace NodeGraphProcessor
 	/// Allow you to modify the generated port view from a field. Can be used to generate multiple ports from one field.
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Method)]
-	public class CustomPortBehaviorAttribute : Attribute
+	public class CustomPortBehaviourAttribute : Attribute
 	{
 		public string fieldName;
 
@@ -152,21 +136,21 @@ namespace NodeGraphProcessor
 		/// </code>
 		/// </summary>
 		/// <param name="fieldName">local node field name</param>
-		public CustomPortBehaviorAttribute(string fieldName) => this.fieldName = fieldName;
+		public CustomPortBehaviourAttribute(string fieldName) => this.fieldName = fieldName;
 	}
 
 	/// <summary>
 	/// Allow to bind a method to generate a specific set of ports based on a field type in a node
 	/// </summary>
 	[AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-	public class CustomPortTypeBehavior : Attribute
+	public class CustomPortTypeBehaviourAttribute : Attribute
 	{
 		/// <summary>
 		/// Target type
 		/// </summary>
 		public Type type;
 
-		public CustomPortTypeBehavior(Type type) => this.type = type;
+		public CustomPortTypeBehaviourAttribute(Type type) => this.type = type;
 	}
 
 	/// <summary>
@@ -185,12 +169,12 @@ namespace NodeGraphProcessor
 	}
 
 	[AttributeUsage(AttributeTargets.Field)]
-	public class VisibleIf : Attribute
+	public class VisibleIfAttribute : Attribute
 	{
 		public string fieldName;
 		public object value;
 
-		public VisibleIf(string fieldName, object value)
+		public VisibleIfAttribute(string fieldName, object value)
 		{
 			this.fieldName = fieldName;
 			this.value = value;
@@ -198,15 +182,15 @@ namespace NodeGraphProcessor
 	}
 
 	[AttributeUsage(AttributeTargets.Field)]
-	public class ShowInInspector : Attribute
+	public class ShowInInspectorAttribute : Attribute
 	{
 		public bool showInNode;
 
-		public ShowInInspector(bool showInNode = false) => this.showInNode = showInNode;
+		public ShowInInspectorAttribute(bool showInNode = false) => this.showInNode = showInNode;
 	}
 
 	[AttributeUsage(AttributeTargets.Field)]
-	public class ShowAsDrawer : Attribute {}
+	public class ShowAsDrawerAttribute : Attribute {}
 
 	[AttributeUsage(AttributeTargets.Field)]
 	public class SettingAttribute : Attribute
@@ -217,5 +201,5 @@ namespace NodeGraphProcessor
 	}
 
 	[AttributeUsage(AttributeTargets.Method)]
-	public class IsCompatibleWithGraph : Attribute {}
+	public class IsCompatibleWithGraphAttribute : Attribute {}
 }

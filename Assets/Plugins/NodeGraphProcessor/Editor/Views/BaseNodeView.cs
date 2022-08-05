@@ -679,7 +679,7 @@ namespace NodeGraphProcessor.Editor
 				//skip if the field is an input/output and not marked as SerializedField
 				var hasInputAttribute = field.GetCustomAttribute(typeof(InputAttribute)) != null;
 				var hasInputOrOutputAttribute = hasInputAttribute || field.GetCustomAttribute(typeof(OutputAttribute)) != null;
-				var showAsDrawer = !fromInspector && field.GetCustomAttribute(typeof(ShowAsDrawer)) != null;
+				var showAsDrawer = !fromInspector && field.GetCustomAttribute(typeof(ShowAsDrawerAttribute)) != null;
 				if (!serializeField && hasInputOrOutputAttribute && !showAsDrawer)
 				{
 					AddEmptyField(field, fromInspector);
@@ -695,7 +695,7 @@ namespace NodeGraphProcessor.Editor
 				}
 
 				// Hide the field if we want to display in in the inspector
-				var showInInspector = field.GetCustomAttribute<ShowInInspector>();
+				var showInInspector = field.GetCustomAttribute<ShowInInspectorAttribute>();
 				if (!serializeField && showInInspector != null && !showInInspector.showInNode && !fromInspector)
 				{
 					AddEmptyField(field, fromInspector);
@@ -705,7 +705,7 @@ namespace NodeGraphProcessor.Editor
 				var showInputDrawer = field.GetCustomAttribute(typeof(InputAttribute)) != null &&
 				                      field.GetCustomAttribute(typeof(SerializeField)) != null;
 				showInputDrawer |= field.GetCustomAttribute(typeof(InputAttribute)) != null &&
-				                   field.GetCustomAttribute(typeof(ShowAsDrawer)) != null;
+				                   field.GetCustomAttribute(typeof(ShowAsDrawerAttribute)) != null;
 				showInputDrawer &= !fromInspector; // We can't show a drawer in the inspector
 				showInputDrawer &= !typeof(IList).IsAssignableFrom(field.FieldType);
 
@@ -894,7 +894,7 @@ namespace NodeGraphProcessor.Editor
 				if (showInputDrawer) AddEmptyField(field, false);
 			}
 
-			var visibleCondition = field.GetCustomAttribute(typeof(VisibleIf)) as VisibleIf;
+			var visibleCondition = field.GetCustomAttribute(typeof(VisibleIfAttribute)) as VisibleIfAttribute;
 			if (visibleCondition != null)
 			{
 				// Check if target field exists:

@@ -80,7 +80,7 @@ public class RelayNode : BaseNode
 		}
 	}
 
-	[CustomPortBehavior(nameof(input))]
+	[CustomPortBehaviour(nameof(input))]
 	private IEnumerable<PortData> InputPortBehavior(List<SerializableEdge> edges)
 	{
 		// When the node is initialized, the input ports is empty because it's this function that generate the ports
@@ -107,7 +107,7 @@ public class RelayNode : BaseNode
 		};
 	}
 
-	[CustomPortBehavior(nameof(output))]
+	[CustomPortBehaviour(nameof(output))]
 	private IEnumerable<PortData> OutputPortBehavior(List<SerializableEdge> edges)
 	{
 		if (inputPorts.Count == 0)

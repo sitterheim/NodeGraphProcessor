@@ -57,7 +57,7 @@ namespace NodeGraphProcessor
 				onParameterChanged?.Invoke();
 		}
 
-		[CustomPortBehavior(nameof(output))]
+		[CustomPortBehaviour(nameof(output))]
 		private IEnumerable<PortData> GetOutputPort(List<SerializableEdge> edges)
 		{
 			if (accessor == ParameterAccessor.Get)
@@ -72,7 +72,7 @@ namespace NodeGraphProcessor
 			}
 		}
 
-		[CustomPortBehavior(nameof(input))]
+		[CustomPortBehaviour(nameof(input))]
 		private IEnumerable<PortData> GetInputPort(List<SerializableEdge> edges)
 		{
 			if (accessor == ParameterAccessor.Set)

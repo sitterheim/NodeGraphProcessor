@@ -189,7 +189,7 @@ namespace NodeGraphProcessor.Editor
 		{
 			var isCompatibleWithGraphMethods = nodeType
 				.GetMethods(BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy)
-				.Where(m => m.GetCustomAttribute<IsCompatibleWithGraph>() != null);
+				.Where(m => m.GetCustomAttribute<IsCompatibleWithGraphAttribute>() != null);
 			var nodeMenuAttributes = nodeType.GetCustomAttributes<NodeMenuItemAttribute>();
 
 			var compatibleGraphTypes = nodeMenuAttributes.Where(n => n.onlyCompatibleWithGraph != null)

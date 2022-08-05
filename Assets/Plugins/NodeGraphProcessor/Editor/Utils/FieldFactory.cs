@@ -157,16 +157,6 @@ namespace NodeGraphProcessor.Editor
 
 		static FieldFactory()
 		{
-			foreach (var type in AppDomain.CurrentDomain.GetAllTypes())
-			{
-				var drawerAttribute = type.GetCustomAttributes(typeof(FieldDrawerAttribute), false).FirstOrDefault() as FieldDrawerAttribute;
-
-				if (drawerAttribute == null)
-					continue;
-
-				AddDrawer(drawerAttribute.fieldType, type);
-			}
-
 			// щ(ºДºщ) ...
 			AddDrawer(typeof(bool), typeof(Toggle));
 			AddDrawer(typeof(int), typeof(IntegerField));
