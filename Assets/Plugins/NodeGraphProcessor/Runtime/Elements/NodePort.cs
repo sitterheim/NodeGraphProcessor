@@ -198,8 +198,8 @@ namespace NodeGraphProcessor
 		/// <summary>
 		/// Get all the edges connected to this port
 		/// </summary>
-		/// <returns></returns>
-		public List<SerializableEdge> GetEdges() => edges;
+		/// <value></value>
+		public List<SerializableEdge> Edges => edges;
 
 		/// <summary>
 		/// Push the value of the port through the edges

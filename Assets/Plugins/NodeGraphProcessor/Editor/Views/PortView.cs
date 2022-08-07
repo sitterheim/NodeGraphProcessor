@@ -90,10 +90,17 @@ namespace NodeGraphProcessor.Editor
 
 			if (name != null)
 				portName = name;
-			visualClass = "Port_" + portType.Name;
+			visualClass = GetVisualClassName();
 			tooltip = portData.tooltip;
 		}
 
+		public virtual string GetVisualClassName()
+		{
+			if (portType.Name.EndsWith("`1"))
+				return $"Port_{portType.Name.Replace("`1", "")}_{portType.GenericTypeArguments[0].Name}"; 
+			return "Port_" + portType.Name;
+		}
+		
 		public event Action<PortView, Edge> OnConnected;
 		public event Action<PortView, Edge> OnDisconnected;
 
@@ -153,7 +160,7 @@ namespace NodeGraphProcessor.Editor
 			{
 				base.portType = data.displayType;
 				portType = data.displayType;
-				visualClass = "Port_" + portType.Name;
+				visualClass = GetVisualClassName();
 			}
 			if (!string.IsNullOrEmpty(data.displayName))
 				portName = data.displayName;

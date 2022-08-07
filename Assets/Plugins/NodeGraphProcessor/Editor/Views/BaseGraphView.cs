@@ -266,7 +266,7 @@ namespace NodeGraphProcessor.Editor
 				{
 					if (port.portData.vertical)
 					{
-						foreach (var edge in port.GetEdges())
+						foreach (var edge in port.Edges)
 							data.copiedEdges.Add(JsonSerializer.Serialize(edge));
 					}
 				}

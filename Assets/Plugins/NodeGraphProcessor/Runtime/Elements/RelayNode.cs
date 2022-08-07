@@ -4,7 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-[Serializable] [NodeMenuItem("Dispatch/Relay")]
+[Serializable]
+//[NodeMenuItem("Dispatch/Relay")]
 public class RelayNode : BaseNode
 {
 	private const string _PackIdentifier = "_Pack";
@@ -55,7 +56,7 @@ public class RelayNode : BaseNode
 		if (inputPorts.Count == 0)
 			return;
 
-		var inputPortEdges = inputPorts[0].GetEdges();
+		var inputPortEdges = inputPorts[0].Edges;
 
 		if (outputPort.portData.identifier != _PackIdentifier && outputIndex >= 0 && (unpackOutput || inputPortEdges.Count == 1))
 		{
@@ -88,7 +89,7 @@ public class RelayNode : BaseNode
 		if (inputPorts.Count != 0)
 		{
 			// Add the size of all input edges:
-			var inputEdges = inputPorts[0]?.GetEdges();
+			var inputEdges = inputPorts[0].Edges;
 			sizeInPixel = inputEdges.Sum(e => Mathf.Max(0, e.outputPort.portData.sizeInPixel - 8));
 		}
 
@@ -124,7 +125,7 @@ public class RelayNode : BaseNode
 			yield break;
 		}
 
-		var inputPortEdges = inputPorts[0].GetEdges();
+		var inputPortEdges = inputPorts[0].Edges;
 		var underlyingPortData = GetUnderlyingPortDataList();
 		if (unpackOutput && inputPortEdges.Count == 1)
 		{
@@ -183,12 +184,12 @@ public class RelayNode : BaseNode
 
 	public List<SerializableEdge> GetNonRelayEdges()
 	{
-		var inputEdges = inputPorts?[0]?.GetEdges();
+		var inputEdges = (inputPorts?[0]).Edges;
 
 		// Iterate until we don't have a relay node in input
 		while (inputEdges.Count == 1 && inputEdges.First().outputNode.GetType() == typeof(RelayNode))
 		{
-			inputEdges = inputEdges.First().outputNode.inputPorts[0]?.GetEdges();
+			inputEdges = inputEdges.First().outputNode.inputPorts[0].Edges;
 		}
 
 		return inputEdges;

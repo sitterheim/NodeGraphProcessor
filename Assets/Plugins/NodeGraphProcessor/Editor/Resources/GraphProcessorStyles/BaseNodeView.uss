@@ -1,9 +1,13 @@
 #node {
-    background-color: rgba(0, 63, 63, 0.8);
+    background-color: rgba(0, 63, 63, 1);
+}
+
+.node {
+    color: rgba(220, 163, 163, 1);
 }
 
 #controls {
-    background-color: rgba(63, 63, 63, 0.8);
+    background-color: rgba(63, 63, 63, 1);
 }
 
 #settings-button {
@@ -35,7 +39,7 @@
 }
 
 .Highlight {
-    background-color: rgba(0, 63, 63, 0.8);
+    background-color: rgba(0, 63, 63, 1);
 }
 
 ParameterNodeView #title {
@@ -180,7 +184,7 @@ ParameterNodeView #controls EnumField > VisualElement > VisualElement {
 
 #input-container > .port-input-element {
     max-width: 180px;
-    background-color: rgba(72, 72, 72, 0.6);
+    background-color: rgba(72, 72, 72, 1);
     margin-top: 3px;
     margin-bottom: 2px;
     padding-top: 1px;
@@ -202,7 +206,7 @@ ParameterNodeView #controls EnumField > VisualElement > VisualElement {
 }
 
 #input-container {
-    opacity: 0.6;
+    opacity: 1;
 }
 
 .node:checked > #input-container {
@@ -238,7 +242,7 @@ ParameterNodeView #controls EnumField > VisualElement > VisualElement {
     align-content: center;
 }
 
-#collapse-button: {
+#collapse-button {
     width: 16px;
     height: 16px;
     margin: 4px;

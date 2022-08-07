@@ -63,7 +63,6 @@ namespace NodeGraphProcessor
 		// Used in port update algorithm
 		private Stack<PortUpdate> fieldsToUpdate = new();
 		private HashSet<PortUpdate> updatedFields = new();
-
 		private HashSet<BaseNode> portUpdateHashSet = new();
 
 		/// <summary>
@@ -110,6 +109,27 @@ namespace NodeGraphProcessor
 			CatchAllExceptions.Run(() => Enable());
 
 			InitializePorts();
+		}
+
+		public bool IsOrphaned()
+		{
+			var hasConnectedPort = false;
+
+			foreach (var port in inputPorts)
+			{
+				hasConnectedPort = port.Edges.Count > 0;
+				if (hasConnectedPort)
+					return false;
+			}
+
+			foreach (var port in outputPorts)
+			{
+				hasConnectedPort = port.Edges.Count > 0;
+				if (hasConnectedPort)
+					return false;
+			}
+
+			return true;
 		}
 
 		/// <summary>
@@ -332,7 +352,7 @@ namespace NodeGraphProcessor
 			// Gather all fields for this port (before to modify them)
 			var nodePorts = portCollection.Where(p => p.fieldName == fieldName);
 			// Gather all edges connected to these fields:
-			var edges = nodePorts.SelectMany(n => n.GetEdges()).ToList();
+			var edges = nodePorts.SelectMany(n => n.Edges).ToList();
 
 			if (fieldInfo.behavior != null)
 			{
@@ -361,7 +381,7 @@ namespace NodeGraphProcessor
 					// in case the port type have changed for an incompatible type, we disconnect all the edges attached to this port
 					if (!BaseGraph.TypesAreConnectable(port.portData.displayType, portData.displayType))
 					{
-						foreach (var edge in port.GetEdges().ToList())
+						foreach (var edge in port.Edges.ToList())
 							graph.Disconnect(edge.GUID);
 					}
 
@@ -456,7 +476,7 @@ namespace NodeGraphProcessor
 							if (port.fieldName != field)
 								continue;
 
-							foreach (var edge in port.GetEdges())
+							foreach (var edge in port.Edges)
 							{
 								var edgeNode = node.IsFieldInput(field) ? edge.outputNode : edge.inputNode;
 								var fieldsWithBehavior = edgeNode.nodeFields.Values.Where(f => HasCustomBehavior(f))
@@ -581,7 +601,7 @@ namespace NodeGraphProcessor
 			portCollection.Remove(edge);
 
 			// Reset default values of input port:
-			var haveConnectedEdges = edge.inputNode.inputPorts.Where(p => p.fieldName == edge.inputFieldName).Any(p => p.GetEdges().Count != 0);
+			var haveConnectedEdges = edge.inputNode.inputPorts.Where(p => p.fieldName == edge.inputFieldName).Any(p => p.Edges.Count != 0);
 			if (edge.inputNode == this && !haveConnectedEdges && CanResetPort(edge.inputPort))
 				edge.inputPort?.ResetToDefault();
 
@@ -675,7 +695,7 @@ namespace NodeGraphProcessor
 		{
 			foreach (var port in inputPorts)
 			{
-				foreach (var edge in port.GetEdges())
+				foreach (var edge in port.Edges)
 					yield return edge.outputNode;
 			}
 		}
@@ -688,7 +708,7 @@ namespace NodeGraphProcessor
 		{
 			foreach (var port in outputPorts)
 			{
-				foreach (var edge in port.GetEdges())
+				foreach (var edge in port.Edges)
 					yield return edge.inputNode;
 			}
 		}
@@ -756,7 +776,7 @@ namespace NodeGraphProcessor
 		{
 			foreach (var port in GetAllPorts())
 			{
-				foreach (var edge in port.GetEdges())
+				foreach (var edge in port.Edges)
 					yield return edge;
 			}
 		}

@@ -300,14 +300,14 @@ namespace NodeGraphProcessor
 			//If the input port does not support multi-connection, we remove them
 			if (autoDisconnectInputs && !inputPort.portData.acceptMultipleEdges)
 			{
-				foreach (var e in inputPort.GetEdges().ToList())
+				foreach (var e in inputPort.Edges.ToList())
 					// TODO: do not disconnect them if the connected port is the same than the old connected
 					Disconnect(e);
 			}
 			// same for the output port:
 			if (autoDisconnectInputs && !outputPort.portData.acceptMultipleEdges)
 			{
-				foreach (var e in outputPort.GetEdges().ToList())
+				foreach (var e in outputPort.Edges.ToList())
 					// TODO: do not disconnect them if the connected port is the same than the old connected
 					Disconnect(e);
 			}
