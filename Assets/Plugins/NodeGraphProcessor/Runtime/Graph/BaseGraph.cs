@@ -159,7 +159,7 @@ namespace NodeGraphProcessor
 			if (t2.IsReallyAssignableFrom(t1))
 				return true;
 
-			// User defined type convertions
+			// User defined type conversions
 			if (TypeAdapter.AreAssignable(t1, t2))
 				return true;
 

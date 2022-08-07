@@ -7,10 +7,10 @@ using UnityEngine;
 namespace NodeGraphProcessor
 {
 	/// <summary>
-	/// Implement this interface to use the inside your class to define type convertions to use inside the graph.
+	/// Implement this interface to use the inside your class to define type conversions to use inside the graph.
 	/// Example:
 	/// <code>
-	/// public class CustomConvertions : ITypeAdapter
+	/// public class CustomConversions : ITypeAdapter
 	/// {
 	///     public static Vector4 ConvertFloatToVector(float from) => new Vector4(from, from, from, from);
 	///     ...
@@ -49,16 +49,16 @@ namespace NodeGraphProcessor
 			return adapters.ContainsKey((from, to));
 		}
 
-		public static MethodInfo GetConvertionMethod(Type from, Type to) => adapterMethods[(from, to)];
+		public static MethodInfo GetConversionMethod(Type from, Type to) => adapterMethods[(from, to)];
 
 		public static object Convert(object from, Type targetType)
 		{
 			if (!adaptersLoaded)
 				LoadAllAdapters();
 
-			Func<object, object> convertionFunction;
-			if (adapters.TryGetValue((from.GetType(), targetType), out convertionFunction))
-				return convertionFunction?.Invoke(from);
+			Func<object, object> conversionFunction;
+			if (adapters.TryGetValue((from.GetType(), targetType), out conversionFunction))
+				return conversionFunction?.Invoke(from);
 
 			return null;
 		}
@@ -99,12 +99,12 @@ namespace NodeGraphProcessor
 					{
 						if (method.GetParameters().Length != 1)
 						{
-							Debug.LogError($"Ignoring convertion method {method} because it does not have exactly one parameter");
+							Debug.LogError($"Ignoring conversion method {method} because it does not have exactly one parameter");
 							continue;
 						}
 						if (method.ReturnType == typeof(void))
 						{
-							Debug.LogError($"Ignoring convertion method {method} because it does not returns anything");
+							Debug.LogError($"Ignoring conversion method {method} because it does not returns anything");
 							continue;
 						}
 						var from = method.GetParameters()[0].ParameterType;
@@ -131,20 +131,20 @@ namespace NodeGraphProcessor
 						}
 						catch (Exception e)
 						{
-							Debug.LogError($"Failed to load the type convertion method: {method}\n{e}");
+							Debug.LogError($"Failed to load the type conversion method: {method}\n{e}");
 						}
 					}
 				}
 			}
 
-			// Ensure that the dictionary contains all the convertions in both ways
+			// Ensure that the dictionary contains all the conversions in both ways
 			// ex: float to vector but no vector to float
 			foreach (var kp in adapters)
 			{
 				if (!adapters.ContainsKey((kp.Key.to, kp.Key.from)))
 				{
 					Debug.LogError(
-						$"Missing convertion method. There is one for {kp.Key.from} to {kp.Key.to} but not for {kp.Key.to} to {kp.Key.from}");
+						$"Missing conversion method. There is one for {kp.Key.from} to {kp.Key.to} but not for {kp.Key.to} to {kp.Key.from}");
 				}
 			}
 
