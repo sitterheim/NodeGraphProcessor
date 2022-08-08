@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 namespace NodeGraphProcessor
 {
@@ -20,6 +22,7 @@ namespace NodeGraphProcessor
 		public string GUID;
 
 		public int computeOrder = -1;
+		public long processingTime;
 
 		//Node view datas
 		public Rect position;
@@ -46,6 +49,8 @@ namespace NodeGraphProcessor
 		/// </summary>
 		[NonSerialized]
 		public readonly NodeOutputPortContainer outputPorts;
+
+		private Stopwatch stopWatch = new();
 
 		[NonSerialized] private bool _needsInspector;
 
@@ -612,9 +617,15 @@ namespace NodeGraphProcessor
 
 		public void OnProcess()
 		{
+			stopWatch.Reset();
+			stopWatch.Start();
+
 			inputPorts.PullDatas();
 
 			CatchAllExceptions.Run(() => Process());
+
+			stopWatch.Stop();
+			processingTime = stopWatch.ElapsedMilliseconds;
 
 			InvokeOnProcessed();
 
@@ -742,6 +753,12 @@ namespace NodeGraphProcessor
 			}
 			return null;
 		}
+
+		/// <summary>
+		/// Override to tell other nodes how many items are expected to be pushed to their input ports. 
+		/// </summary>
+		/// <returns></returns>
+		public virtual int GetExpectedInputCount() => 1;
 
 		/// <summary>
 		/// Get the port from field name and identifier

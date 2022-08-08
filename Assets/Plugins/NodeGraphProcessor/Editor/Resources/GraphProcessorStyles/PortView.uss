@@ -49,15 +49,43 @@ PortView > #connector > #cap:hover {
     height: 6px;
 }
 
-.Port_Boolean {    --port-color: #FF00FF;}
-.Port_Int32 {    --port-color: #FF00FF;}
-.Port_GameObject {    --port-color: #FF00FF;}
-.Port_Color {    --port-color: #FF00FF;}
-.Port_Object { --port-color: #FF00FF; }
+.Port_Boolean {
+    --port-color: #FF00FF;
+}
+
+.Port_Int32 {
+    --port-color: #FF00FF;
+}
+
+.Port_GameObject {
+    --port-color: #FF00FF;
+}
+
+.Port_Color {
+    --port-color: #FF00FF;
+}
+
+.Port_Object {
+    --port-color: #FF00FF;
+}
 
 /* Mesh Graph custom colors */
-.Port_String { --port-color: #70B2FF; }
-.Port_Single { --port-color: #A1A1A1; }
-.Port_float3 { --port-color: #6363C7; }
-.Port_IList_float3 { --port-color: #6363C7; }
-.Port_MeshGeometry { --port-color: #00D6A3; }
+.Port_String {
+    --port-color: #70B2FF;
+}
+
+.Port_Single {
+    --port-color: #A1A1A1;
+}
+
+.Port_float3 {
+    --port-color: #6363C7;
+}
+
+.Port_IList_float3 {
+    --port-color: #6363C7;
+}
+
+.Port_MeshGeometry {
+    --port-color: #00D6A3;
+}

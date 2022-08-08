@@ -26,6 +26,7 @@ namespace NodeGraphProcessor.Editor
 		private readonly string baseNodeStyle = "GraphProcessorStyles/BaseNodeView";
 
 		private readonly Label computeOrderLabel = new();
+		private readonly Label processingTimeLabel = new();
 
 		[NonSerialized] private readonly List<IconBadge> badges = new();
 
@@ -102,7 +103,8 @@ namespace NodeGraphProcessor.Editor
 			if (node.isRenamable)
 				capabilities |= Capabilities.Renamable;
 
-			owner.computeOrderUpdated += ComputeOrderUpdatedCallback;
+			owner.computeOrderUpdated += OnComputeOrderUpdated;
+			node.onProcessed += OnProcessed;
 			node.onMessageAdded += AddMessageView;
 			node.onMessageRemoved += RemoveMessageView;
 			node.onPortsUpdated += a => schedule.Execute(_ => UpdatePortsForField(a)).ExecuteLater(0);
@@ -346,8 +348,9 @@ namespace NodeGraphProcessor.Editor
 
 		private void InitializeDebug()
 		{
-			ComputeOrderUpdatedCallback();
+			OnComputeOrderUpdated();
 			debugContainer.Add(computeOrderLabel);
+			debugContainer.Add(processingTimeLabel);
 		}
 
 		public List<PortView> GetPortViewsFromFieldName(string fieldName)
@@ -631,9 +634,15 @@ namespace NodeGraphProcessor.Editor
 
 		public void UnHighlight() => RemoveFromClassList("Highlight");
 
-		private void ComputeOrderUpdatedCallback() =>
-			//Update debug compute order
+		private void OnComputeOrderUpdated()
+		{
 			computeOrderLabel.text = "Compute order: " + nodeTarget.computeOrder;
+		}
+		private void OnProcessed()
+		{
+			var ms = nodeTarget.processingTime;
+			processingTimeLabel.text = ms > 0 ? $"Process time: {nodeTarget.processingTime} ms" : "";
+		}
 
 		public virtual void Enable(bool fromInspector = false) => DrawDefaultInspector(fromInspector);
 
