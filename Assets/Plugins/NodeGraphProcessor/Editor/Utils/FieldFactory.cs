@@ -28,7 +28,7 @@ namespace NodeGraphProcessor.Editor
 			fieldDrawers.TryGetValue(t, out drawerType);
 
 			if (drawerType == null)
-				drawerType = fieldDrawers.FirstOrDefault(kp => kp.Key.IsReallyAssignableFrom(t)).Value;
+				drawerType = fieldDrawers.FirstOrDefault(kp => kp.Key.IsAssignableOrConvertibleFromAndTo(t)).Value;
 
 			if (drawerType == null)
 			{

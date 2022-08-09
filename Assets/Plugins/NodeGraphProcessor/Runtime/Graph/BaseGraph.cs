@@ -156,7 +156,7 @@ namespace NodeGraphProcessor
 				return true;
 
 			//Check for type assignability
-			if (t2.IsReallyAssignableFrom(t1))
+			if (t2.IsAssignableOrConvertibleFromAndTo(t1))
 				return true;
 
 			// User defined type conversions

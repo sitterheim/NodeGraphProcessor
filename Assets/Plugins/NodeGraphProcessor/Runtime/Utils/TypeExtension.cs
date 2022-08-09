@@ -5,7 +5,7 @@ namespace NodeGraphProcessor
 {
 	public static class TypeExtension
 	{
-		public static bool IsReallyAssignableFrom(this Type type, Type otherType)
+		public static bool IsAssignableOrConvertibleFromAndTo(this Type type, Type otherType)
 		{
 			if (type.IsAssignableFrom(otherType))
 				return true;
