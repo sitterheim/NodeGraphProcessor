@@ -641,7 +641,7 @@ namespace NodeGraphProcessor.Editor
 		private void OnProcessed()
 		{
 			var ms = nodeTarget.processingTime;
-			processingTimeLabel.text = ms > 0 ? $"Process time: {nodeTarget.processingTime} ms" : "";
+			processingTimeLabel.text = ms > 0 ? $"Process time: {nodeTarget.processingTime} ms" : string.Empty;
 		}
 
 		public virtual void Enable(bool fromInspector = false) => DrawDefaultInspector(fromInspector);

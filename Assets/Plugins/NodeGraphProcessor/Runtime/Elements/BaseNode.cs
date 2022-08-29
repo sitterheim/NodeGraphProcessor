@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
 
@@ -508,6 +509,8 @@ namespace NodeGraphProcessor
 		}
 
 		internal void DestroyInternal() => CatchAllExceptions.Run(() => Destroy());
+		
+		public virtual void Dispose() {}
 
 		/// <summary>
 		/// Called only when the node is created, not when instantiated

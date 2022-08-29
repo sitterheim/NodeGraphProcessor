@@ -150,6 +150,8 @@ namespace NodeGraphProcessor.Editor
 
 			connectorListener = CreateEdgeConnectorListener();
 
+			AssemblyReloadEvents.beforeAssemblyReload += OnBeforeAssemblyReloadDisposeNodes;
+
 			// When pressing ctrl-s, we save the graph
 			EditorSceneManager.sceneSaved += _ => SaveGraphToDisk();
 			RegisterCallback<KeyDownEvent>(e =>
@@ -215,6 +217,12 @@ namespace NodeGraphProcessor.Editor
 			graph.onExposedParameterListChanged -= OnExposedParameterListChanged;
 			graph.onExposedParameterModified += s => onExposedParameterModified?.Invoke(s);
 			graph.onGraphChanges -= GraphChangesCallback;
+		}
+
+		private void OnBeforeAssemblyReloadDisposeNodes()
+		{
+			foreach (var nodeView in nodeViews)
+				nodeView.nodeTarget.Dispose();
 		}
 
 		/// <summary>
@@ -370,7 +378,7 @@ namespace NodeGraphProcessor.Editor
 				copiedNodesMap.TryGetValue(edge.outputNode.GUID, out var oldOutputNode);
 
 				// We avoid to break the graph by replacing unique connections:
-				if ((oldInputNode == null && !edge.inputPort.portData.acceptMultipleEdges) || !edge.outputPort.portData.acceptMultipleEdges)
+				if (oldInputNode == null && !edge.inputPort.portData.acceptMultipleEdges || !edge.outputPort.portData.acceptMultipleEdges)
 					continue;
 
 				oldInputNode = oldInputNode ?? edge.inputNode;
